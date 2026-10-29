@@ -1,17 +1,24 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware # NEW IMPORT
+from fastapi.middleware.cors import CORSMiddleware
+
+# 1. Import the router
+from app.routers import lgas 
 
 app = FastAPI(title="NSW LGA Road Risk API")
 
-# NEW CORS CONFIGURATION
+# 2. CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, change "*" to ["http://localhost:3000"] or the React URL
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# 3. Attach the router to the app
+app.include_router(lgas.router)
+
+# 4. Health check
 @app.get("/")
 def read_root():
-    return {"message": "Hello World! The API is running."}
+    return {"message": "API is running!"}
