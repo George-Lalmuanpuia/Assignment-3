@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # 1. Import the router
-from app.routers import lgas 
+from app.routers import lgas, predict, cluster
 
 app = FastAPI(title="NSW LGA Road Risk API")
 
@@ -17,6 +17,8 @@ app.add_middleware(
 
 # 3. Attach the router to the app
 app.include_router(lgas.router)
+app.include_router(cluster.router)
+app.include_router(predict.router)
 
 # 4. Health check
 @app.get("/")
