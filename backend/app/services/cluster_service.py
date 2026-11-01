@@ -20,7 +20,11 @@ except Exception as e:
 
 def predict_lga_cluster(lga_name, year):
     if cluster_bundle is None or df is None:
-        return {"cluster_id": -1, "cluster_name": "MOCK Cluster"}
+        return {
+            "cluster_id": -1, 
+            "cluster_name": "MOCK Cluster",
+            "features_used": {},
+            "is_mock": True}
 
     # 1. Find the LGA in the CSV
     row = df[(df["LGA"].str.lower() == lga_name.lower()) & (df["Year"] == year)]

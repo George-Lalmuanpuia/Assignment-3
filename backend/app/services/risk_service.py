@@ -17,7 +17,11 @@ except Exception as e:
 def predict_lga_risk(population, severe, wet, rural):
     if risk_bundle is None:
         # Fallback mock data 
-        return {"risk_level": "MOCK", "probability": 0.5, "threshold": 0.5}
+        return {
+            "risk_level": "MOCK", 
+            "probability": 0.5, 
+            "threshold": 0.5
+        }
     
     # 1. Format the input exactly as the model expects
     features = risk_bundle["features"]

@@ -10,3 +10,4 @@ class ClusterResponse(BaseModel):
     cluster_id: int
     cluster_name: str
     features_used: dict
+    is_mock: bool
