@@ -69,6 +69,8 @@ Accepts LGA featurers and return the logistic regression AI prediction.
     "rural_road_pct": 20.0
   }
 }
+```json
+
 **Error Response (422 Unprocessable Entity) - If validation fails:**
 ```json
 {
