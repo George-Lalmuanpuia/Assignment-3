@@ -24,10 +24,14 @@ def predict_lga_cluster(lga_name, year):
             "cluster_id": -1, 
             "cluster_name": "MOCK Cluster",
             "features_used": {},
-            "is_mock": True}
+            "pc1": 0.0,     
+            "pc2": 0.0,    
+            "is_mock": True
+        }
 
     # 1. Find the LGA in the CSV
-    row = df[(df["LGA"].str.lower() == lga_name.lower()) & (df["Year"] == year)]
+    # Added .str.strip() to handle messy spaces in the data
+    row = df[(df["LGA"].str.strip().str.lower() == lga_name.strip().lower()) & (df["Year"] == year)]
     if row.empty:
         return None # this error is handled in the router
 
@@ -36,13 +40,23 @@ def predict_lga_cluster(lga_name, year):
     X_input = row[features].values
     scaler = cluster_bundle["scaler"]
     kmeans = cluster_bundle["kmeans"]
+    pca = cluster_bundle["pca"]     #Extract the PCA model
     
     X_scaled = scaler.transform(X_input)
+
+    # 3. Calculate PC1 and PC2 for the chart!
+    coords = pca.transform(X_scaled)    
+    pc1 = float(coords[0][0])           
+    pc2 = float(coords[0][1])           
+
     cluster_id = int(kmeans.predict(X_scaled)[0])
     cluster_name = cluster_bundle["cluster_names"][cluster_id]
 
     return {
         "cluster_id": cluster_id,
         "cluster_name": cluster_name,
-        "features_used": dict(zip(features, X_input[0].tolist()))
+        "features_used": dict(zip(features, X_input[0].tolist())),
+        "pc1": round(pc1, 4),       
+        "pc2": round(pc2, 4),       
+        "is_mock": False            
     }
