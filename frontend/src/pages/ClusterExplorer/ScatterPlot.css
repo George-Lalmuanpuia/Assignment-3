@@ -1,0 +1,205 @@
+/* Scatter Plot Container */
+.scatter-container {
+  width: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--sans);
+  text-align: left;
+}
+
+.scatter-container h2 {
+  color: var(--text-h);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.scatter-description {
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Filters */
+.scatter-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  background: var(--social-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.scatter-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: var(--text-h);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scatter-filters input,
+.scatter-filters select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text-h);
+  font: 14px var(--sans);
+  outline: none;
+}
+
+.scatter-filters input:focus,
+.scatter-filters select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.scatter-filters button {
+  align-self: end;
+  padding: 11px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  background: var(--accent);
+  color: white;
+  font: 600 14px var(--sans);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.scatter-filters button:hover {
+  opacity: 0.85;
+}
+
+/* Record Count */
+.scatter-count {
+  margin: 12px 0;
+  color: var(--text);
+  font-size: 13px;
+}
+
+/* Chart */
+.scatter-chart-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.scatter-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.scatter-svg .axis-label {
+  fill: var(--text-h);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scatter-svg .domain,
+.scatter-svg .tick line {
+  stroke: var(--border);
+}
+
+.scatter-svg .tick text {
+  fill: var(--text);
+  font-size: 11px;
+}
+
+.scatter-svg .grid line {
+  stroke: var(--border);
+  stroke-opacity: 0.7;
+  stroke-dasharray: 3 3;
+}
+
+.scatter-svg .grid path {
+  display: none;
+}
+
+.scatter-svg .data-point {
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+/* Tooltip */
+.scatter-tooltip {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  padding: 12px 15px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+  box-shadow: var(--shadow);
+  font-size: 12px;
+  line-height: 1.7;
+  transition: opacity 0.15s ease;
+}
+
+.scatter-tooltip strong {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* Error and Empty States */
+.scatter-error {
+  margin: 12px 0;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scatter-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scatter-container {
+    padding: 16px;
+  }
+
+  .scatter-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .scatter-chart-wrapper {
+    padding: 4px;
+  }
+
+  .scatter-svg .tick text {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scatter-filters {
+    grid-template-columns: 1fr;
+  }
+}
