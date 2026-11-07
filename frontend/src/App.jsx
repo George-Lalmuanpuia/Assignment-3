@@ -4,6 +4,8 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import "./App.css";
 
+import ClusterExplorer from "./pages/ClusterExplorer/ClusterExplorer";
+
 function App() {
   const [currentPage, setCurrentPage] = useState("Home");
 
@@ -19,9 +21,7 @@ function App() {
 
         {currentPage === "Risk Predictor" && <RiskPredictor />}
 
-        {currentPage === "Cluster Explorer" && (
-          <h1>Cluster Explorer</h1>
-        )}
+        {currentPage === "Cluster Explorer" && <ClusterExplorer />}
 
         {currentPage === "About / Method" && (
           <h1>About / Method</h1>
