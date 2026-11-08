@@ -1,205 +1,387 @@
-/* Scatter Plot Container */
-.scatter-container {
+
+/* =========================================
+   MAIN SCATTER PLOT CONTAINER
+========================================= */
+
+.scatter-plot-container {
   width: 100%;
-  padding: 28px;
+  padding: 24px;
   box-sizing: border-box;
-  color: var(--text);
-  background: var(--bg);
-  font-family: var(--sans);
-  text-align: left;
-}
-
-.scatter-container h2 {
-  color: var(--text-h);
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.scatter-description {
-  color: var(--text);
-  font-size: 14px;
+  color: #ffffff;
+  background: #171b26;
+  border: 1px solid #303746;
+  border-radius: 12px;
   margin-bottom: 24px;
 }
 
-/* Filters */
+.scatter-plot-container h2 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.scatter-count {
+  color: #aeb8c8;
+  font-size: 13px;
+  margin: 0 0 22px;
+}
+
+/* =========================================
+   FILTER AREA
+========================================= */
+
 .scatter-filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   gap: 16px;
-  padding: 20px;
-  margin-bottom: 18px;
-  background: var(--social-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  align-items: end;
+  margin-bottom: 22px;
 }
 
-.scatter-filters label {
+.scatter-filters > label {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  color: var(--text-h);
+  gap: 8px;
+  color: #dce2ec;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.scatter-filters input,
-.scatter-filters select {
+.scatter-filters input[type="number"] {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
   padding: 10px 12px;
-  border: 1px solid var(--border);
+  color: #ffffff;
+  background: #222938;
+  border: 1px solid #424d60;
   border-radius: 7px;
-  background: var(--bg);
-  color: var(--text-h);
-  font: 14px var(--sans);
   outline: none;
 }
 
-.scatter-filters input:focus,
-.scatter-filters select:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
+.scatter-filters input[type="number"]:focus {
+  border-color: #7299e8;
+  box-shadow: 0 0 0 2px rgba(114, 153, 232, 0.15);
 }
 
-.scatter-filters button {
-  align-self: end;
-  padding: 11px 16px;
-  border: 1px solid var(--accent);
+.scatter-filters input::placeholder {
+  color: #8792a5;
+}
+
+/* =========================================
+   MULTI-SELECT DROPDOWN
+========================================= */
+
+.multi-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.multi-select-label {
+  color: #dce2ec;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.multi-select-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 39px;
+  padding: 10px 12px;
+  color: #ffffff;
+  background: #222938;
+  border: 1px solid #424d60;
   border-radius: 7px;
-  background: var(--accent);
-  color: white;
-  font: 600 14px var(--sans);
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  font-size: 13px;
+  text-align: left;
 }
 
-.scatter-filters button:hover {
-  opacity: 0.85;
+.multi-select-trigger:hover {
+  border-color: #7299e8;
 }
 
-/* Record Count */
-.scatter-count {
-  margin: 12px 0;
-  color: var(--text);
+.multi-select-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #222938;
+  border: 1px solid #424d60;
+  border-radius: 8px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.multi-select-menu p {
+  color: #b8c1d0;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.multi-select-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 7px;
+  color: #e8edf5;
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.multi-select-option:hover {
+  background: #303b4d;
+}
+
+.multi-select-option input {
+  accent-color: #7299e8;
+  cursor: pointer;
+}
+
+/* =========================================
+   RESET BUTTON
+========================================= */
+
+.scatter-reset-button {
+  min-height: 39px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: #35445d;
+  border: 1px solid #536887;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.scatter-reset-button:hover {
+  background: #465a79;
+}
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.scatter-error {
+  padding: 11px 14px;
+  margin: 0 0 15px;
+  color: #ffb4b4;
+  background: rgba(220, 60, 60, 0.12);
+  border: 1px solid rgba(220, 60, 60, 0.35);
+  border-radius: 7px;
   font-size: 13px;
 }
 
-/* Chart */
+/* =========================================
+   CHART WRAPPER
+========================================= */
+
 .scatter-chart-wrapper {
   position: relative;
   width: 100%;
-  min-height: 350px;
-  padding: 12px;
-  box-sizing: border-box;
+  min-height: 300px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
-  box-shadow: var(--shadow);
+  background: #171b26;
+  border-radius: 8px;
 }
 
 .scatter-svg {
   display: block;
   width: 100%;
   height: auto;
+  min-height: 300px;
   overflow: visible;
 }
 
-.scatter-svg .axis-label {
-  fill: var(--text-h);
-  font-size: 13px;
+/* =========================================
+   AXIS LABELS AND TICK VALUES
+========================================= */
+
+.scatter-axis text {
+  fill: #ffffff;
+  font-size: 12px;
+}
+
+.scatter-axis path,
+.scatter-axis line {
+  stroke: #ffffff;
+  stroke-opacity: 0.7;
+}
+
+.scatter-axis-label {
+  fill: #ffffff;
+  font-size: 14px;
   font-weight: 600;
 }
 
-.scatter-svg .domain,
-.scatter-svg .tick line {
-  stroke: var(--border);
+/* =========================================
+   GRID LINES
+========================================= */
+
+.scatter-grid line {
+  stroke: #ffffff;
+  stroke-opacity: 0.22;
+  stroke-width: 1px;
 }
 
-.scatter-svg .tick text {
-  fill: var(--text);
-  font-size: 11px;
+.scatter-grid path {
+  stroke: none;
 }
 
-.scatter-svg .grid line {
-  stroke: var(--border);
-  stroke-opacity: 0.7;
-  stroke-dasharray: 3 3;
-}
+/* =========================================
+   DATA POINTS
+========================================= */
 
-.scatter-svg .grid path {
-  display: none;
-}
-
-.scatter-svg .data-point {
-  cursor: pointer;
+.scatter-point {
   transition: opacity 0.15s ease;
 }
 
-/* Tooltip */
+/* =========================================
+   TOOLTIP
+========================================= */
+
 .scatter-tooltip {
   position: absolute;
-  z-index: 10;
-  pointer-events: none;
+  z-index: 20;
   opacity: 0;
-  padding: 12px 15px;
-  border: 1px solid var(--border);
+  pointer-events: none;
+  max-width: 240px;
+  padding: 12px 14px;
+  color: #ffffff;
+  background: #252e3d;
+  border: 1px solid #52617a;
   border-radius: 8px;
-  background: var(--bg);
-  color: var(--text-h);
-  box-shadow: var(--shadow);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.35);
   font-size: 12px;
   line-height: 1.7;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.12s ease;
 }
 
 .scatter-tooltip strong {
-  color: var(--accent);
-  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-size: 13px;
 }
 
-/* Error and Empty States */
-.scatter-error {
-  margin: 12px 0;
-  color: #dc2626;
-  font-size: 13px;
-  font-weight: 600;
-}
+/* =========================================
+   EMPTY CHART MESSAGE
+========================================= */
 
 .scatter-empty {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--text);
+  color: #b8c1d0;
   font-size: 14px;
   text-align: center;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .scatter-container {
-    padding: 16px;
-  }
+/* =========================================
+   LEGEND CONTAINER
+========================================= */
 
+.scatter-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 18px;
+  background: #202735;
+  border: 1px solid #394456;
+  border-radius: 9px;
+}
+
+.legend-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scatter-legend-title {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+
+.scatter-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #e0e6ef;
+  font-size: 13px;
+}
+
+/* SOLID K-MEANS CIRCLES */
+
+.scatter-legend-dot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+/* HOLLOW DBSCAN RINGS */
+
+.scatter-legend-ring {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: 3.5px solid;
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT
+========================================= */
+
+@media (max-width: 900px) {
   .scatter-filters {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 14px;
-    gap: 12px;
-  }
-
-  .scatter-chart-wrapper {
-    padding: 4px;
-  }
-
-  .scatter-svg .tick text {
-    font-size: 9px;
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
+  .scatter-plot-container {
+    padding: 15px;
+  }
+
   .scatter-filters {
     grid-template-columns: 1fr;
+  }
+
+  .scatter-legend {
+    padding: 14px;
+  }
+
+  .legend-items {
+    gap: 12px;
+  }
+
+  .scatter-plot-container h2 {
+    font-size: 19px;
   }
 }

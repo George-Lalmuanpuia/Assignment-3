@@ -1,21 +1,46 @@
+
 .cluster-explorer-page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 30px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px;
+  padding: 20px;
   box-sizing: border-box;
-  color: var(--text);
-  background: var(--bg);
-  font-family: var(--sans);
 }
 
 .cluster-explorer-page h1 {
+  margin: 0;
   color: var(--text-h);
-  text-align: center;
+}
+
+.scatter-section {
+  display: block;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.profile-section {
+  display: block;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
 @media (max-width: 768px) {
   .cluster-explorer-page {
-    padding: 20px 12px;
+    padding: 12px;
+  }
+
+  .scatter-section,
+  .profile-section {
+    padding: 14px;
   }
 }
