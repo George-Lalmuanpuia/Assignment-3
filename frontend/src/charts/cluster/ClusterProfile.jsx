@@ -90,8 +90,7 @@ function ClusterProfile({ data = [] }) {
     );
   }, [chartData]);
 
-  // Calculate the arithmetic mean of each feature across clusters.
-  // Each cluster contributes equally to the average.
+  // Calculate the arithmetic mean of each feature across all LGA records.
   const averageProfile = useMemo(() => {
     return FEATURES.map((feature) => ({
       feature,
@@ -121,8 +120,6 @@ function ClusterProfile({ data = [] }) {
   }, [selectedCluster, selectedProfile, averageProfile]);
 
   // Use the same reference scale when switching between clusters.
-  // Crash rate uses its maximum observed cluster value.
-  // Percentage features use a 0–100 scale.
   const getFeatureMaximum = (feature) => {
     if (feature === "Crash rate per 100k") {
       return Math.max(
@@ -140,7 +137,7 @@ function ClusterProfile({ data = [] }) {
       return {
         title: "Overall Cluster Averages",
         description:
-          "Each bar represents the arithmetic average of that feature across all available clusters. Every cluster contributes equally to the calculation.",
+          "Each bar represents the arithmetic average of that feature across all available LGA records. These averages provide an overall view of the road-safety characteristics represented in the dataset.",
       };
     }
 
@@ -176,13 +173,13 @@ function ClusterProfile({ data = [] }) {
       if (difference > 0) {
         description += ` Its crash rate is ${percentageDifference.toFixed(
           1
-        )}% above the average across clusters.`;
+        )}% above the overall dataset average.`;
       } else if (difference < 0) {
         description += ` Its crash rate is ${percentageDifference.toFixed(
           1
-        )}% below the average across clusters.`;
+        )}% below the overall dataset average.`;
       } else {
-        description += " Its crash rate matches the average across clusters.";
+        description += " Its crash rate matches the overall dataset average.";
       }
     }
 
@@ -351,7 +348,7 @@ function ClusterProfile({ data = [] }) {
   return (
     <section className="cluster-profile-chart">
       <div className="profile-header">
-        <div>
+        <div className="profile-header-content">
           <span className="profile-eyebrow">
             CLUSTER ANALYSIS
           </span>
@@ -359,13 +356,21 @@ function ClusterProfile({ data = [] }) {
           <h2>Cluster Profile Comparison</h2>
 
           <p className="profile-description">
-            Explore the differences between clusters using four
-            road-safety indicators.
-          </p>
-        </div>
+            This bar chart presents a comparative analysis of
+            road-safety characteristics across the identified
+            K-Means clusters. It examines four key indicators:
+            crash rate per 100,000 population, severe crash
+            percentage, wet-weather crash percentage and
+            rural-road crash percentage.
 
-        <div className="profile-header-icon">
-          <span>↗</span>
+            By displaying the average values of these indicators
+            across all LGA records, users can identify broader
+            road-safety patterns and examine how the different
+            clusters vary in their characteristics. Selecting an
+            individual cluster also allows users to explore its
+            feature values in greater detail and compare its
+            road-safety profile with the overall dataset averages.
+          </p>
         </div>
       </div>
 
@@ -435,7 +440,7 @@ function ClusterProfile({ data = [] }) {
 
             <p>
               {selectedCluster === "All"
-                ? "Average value of each feature across all clusters"
+                ? "Average value of each feature across all LGA records"
                 : "Individual feature values for the selected cluster"}
             </p>
           </div>

@@ -15,18 +15,13 @@ function MultiSelectDropdown({
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   function handleCheckboxChange(option) {
@@ -51,7 +46,6 @@ function MultiSelectDropdown({
             ? placeholder
             : `${selectedValues.length} selected`}
         </span>
-
         <span>{isOpen ? "▲" : "▼"}</span>
       </button>
 
@@ -80,6 +74,17 @@ function MultiSelectDropdown({
 function ScatterPlot({ data = [] }) {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
+
+  const [showUnderstanding, setShowUnderstanding] = useState(false);
+
+  useEffect(() => {
+    function handleEscape(event) {
+      if (event.key === "Escape") setShowUnderstanding(false);
+    }
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
 
   // FILTER STATES
   const [selectedYears, setSelectedYears] = useState([]);
@@ -139,7 +144,6 @@ function ScatterPlot({ data = [] }) {
 
   const dbscanOptions = ["Noise", "Normal"];
 
-  // SHARED CLUSTER COLOUR SCALE
   const clusterColor = useMemo(
     () =>
       d3
@@ -157,30 +161,21 @@ function ScatterPlot({ data = [] }) {
         selectedYears.includes(String(item.Year));
 
       const lgaMatch =
-        selectedLGAs.length === 0 ||
-        selectedLGAs.includes(item.LGA);
+        selectedLGAs.length === 0 || selectedLGAs.includes(item.LGA);
 
       const clusterMatch =
         selectedClusters.length === 0 ||
         selectedClusters.includes(item["kmean data"]);
 
       const dbscanValue = item["is noise"] ? "Noise" : "Normal";
-
       const dbscanMatch =
         selectedDBSCAN.length === 0 ||
         selectedDBSCAN.includes(dbscanValue);
 
-      const pc1MinMatch =
-        pc1Min === "" || item.PC1 >= Number(pc1Min);
-
-      const pc1MaxMatch =
-        pc1Max === "" || item.PC1 <= Number(pc1Max);
-
-      const pc2MinMatch =
-        pc2Min === "" || item.PC2 >= Number(pc2Min);
-
-      const pc2MaxMatch =
-        pc2Max === "" || item.PC2 <= Number(pc2Max);
+      const pc1MinMatch = pc1Min === "" || item.PC1 >= Number(pc1Min);
+      const pc1MaxMatch = pc1Max === "" || item.PC1 <= Number(pc1Max);
+      const pc2MinMatch = pc2Min === "" || item.PC2 >= Number(pc2Min);
+      const pc2MaxMatch = pc2Max === "" || item.PC2 <= Number(pc2Max);
 
       return (
         yearMatch &&
@@ -230,12 +225,10 @@ function ScatterPlot({ data = [] }) {
     setSelectedLGAs([]);
     setSelectedClusters([]);
     setSelectedDBSCAN([]);
-
     setPc1Min("");
     setPc1Max("");
     setPc2Min("");
     setPc2Max("");
-
     setError("");
   }
 
@@ -267,10 +260,7 @@ function ScatterPlot({ data = [] }) {
 
     const chart = svg
       .append("g")
-      .attr(
-        "transform",
-        `translate(${margin.left},${margin.top})`
-      );
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const xExtent = d3.extent(filteredData, (d) => d.PC1);
     const yExtent = d3.extent(filteredData, (d) => d.PC2);
@@ -294,7 +284,7 @@ function ScatterPlot({ data = [] }) {
       ])
       .range([chartHeight, 0]);
 
-    // WHITE GRID
+    // GRID
     chart
       .append("g")
       .attr("class", "scatter-grid")
@@ -352,22 +342,15 @@ function ScatterPlot({ data = [] }) {
       .attr("cx", (d) => xScale(d.PC1))
       .attr("cy", (d) => yScale(d.PC2))
       .attr("r", (d) => (d["is noise"] ? 6 : 4.5))
-
-      // NORMAL POINTS: SOLID CLUSTER COLOUR
-      // NOISE POINTS: TRANSPARENT CENTRE
       .attr("fill", (d) =>
         d["is noise"] ? "none" : clusterColor(d["kmean data"])
       )
-
-      // NOISE RING: MATCHES ITS K-MEANS CLUSTER
       .attr("stroke", (d) =>
         d["is noise"] ? clusterColor(d["kmean data"]) : "none"
       )
       .attr("stroke-width", (d) => (d["is noise"] ? 3.5 : 0))
       .attr("opacity", 0.85)
       .style("cursor", "pointer")
-
-      // MOUSEOVER
       .on("mouseover", function (event, d) {
         d3.select(this)
           .raise()
@@ -385,8 +368,6 @@ function ScatterPlot({ data = [] }) {
             DBSCAN: ${d["is noise"] ? "Noise" : "Normal"}
           `);
       })
-
-      // MOUSEMOVE
       .on("mousemove", function (event) {
         const wrapper = wrapperRef.current;
         const bounds = wrapper.getBoundingClientRect();
@@ -399,7 +380,6 @@ function ScatterPlot({ data = [] }) {
 
         const tooltipWidth = tooltipNode.offsetWidth;
         const tooltipHeight = tooltipNode.offsetHeight;
-
         const gap = 14;
 
         let left = mouseX + gap;
@@ -413,15 +393,10 @@ function ScatterPlot({ data = [] }) {
           top = mouseY - tooltipHeight - gap;
         }
 
-        left = Math.max(0, left);
-        top = Math.max(0, top);
-
         tooltip
-          .style("left", `${left}px`)
-          .style("top", `${top}px`);
+          .style("left", `${Math.max(0, left)}px`)
+          .style("top", `${Math.max(0, top)}px`);
       })
-
-      // MOUSEOUT
       .on("mouseout", function (event, d) {
         d3.select(this)
           .attr("r", d["is noise"] ? 6 : 4.5)
@@ -429,22 +404,36 @@ function ScatterPlot({ data = [] }) {
 
         tooltip.style("opacity", 0);
       });
-
   }, [filteredData, error, clusterColor]);
 
-  // JSX
   return (
     <div className="scatter-plot-container">
+      {/* TITLE AND INTRODUCTION */}
+      <div className="scatter-title-area">
+        <h2>Road Risk Clustering Scatter Plot</h2>
 
-      <h2>Road Risk Clustering Scatter Plot</h2>
+        <p className="scatter-description">
+          This scatter plot presents the road-safety clustering results for
+          Local Government Areas (LGAs) using Principal Component Analysis
+          (PCA). Each point represents an LGA, positioned according to its
+          PC1 and PC2 values. These two principal components summarise
+          patterns and variations across multiple road-safety features,
+          allowing complex, multidimensional data to be explored through a
+          two-dimensional visualisation.
+        </p>
 
-      <p className="scatter-count">
-        Showing {filteredData.length} of {cleanData.length} records
-      </p>
+        <p className="scatter-description">
+          The colours represent the K-Means clusters, highlighting groups
+          of LGAs with similar road-safety characteristics. Hollow markers
+          identify observations classified as noise by DBSCAN. By examining
+          the distribution of points, users can explore similarities and
+          differences between areas and observe how the clustering
+          algorithms group LGAs based on the patterns in the dataset.
+        </p>
+      </div>
 
       {/* FILTERS */}
       <div className="scatter-filters">
-
         <MultiSelectDropdown
           label="Year"
           options={yearOptions}
@@ -477,7 +466,7 @@ function ScatterPlot({ data = [] }) {
           placeholder="Select DBSCAN type"
         />
 
-        <label className="range-filter">
+        <label>
           PC1 Minimum
           <input
             type="number"
@@ -487,7 +476,7 @@ function ScatterPlot({ data = [] }) {
           />
         </label>
 
-        <label className="range-filter">
+        <label>
           PC1 Maximum
           <input
             type="number"
@@ -497,7 +486,7 @@ function ScatterPlot({ data = [] }) {
           />
         </label>
 
-        <label className="range-filter">
+        <label>
           PC2 Minimum
           <input
             type="number"
@@ -507,7 +496,7 @@ function ScatterPlot({ data = [] }) {
           />
         </label>
 
-        <label className="range-filter">
+        <label>
           PC2 Maximum
           <input
             type="number"
@@ -524,20 +513,25 @@ function ScatterPlot({ data = [] }) {
         >
           Reset Filters
         </button>
-
       </div>
 
-      {error && (
-        <p className="scatter-error">{error}</p>
-      )}
+      {error && <p className="scatter-error">{error}</p>}
+
+      {/* BUTTON BELOW FILTERS, ABOVE CHART */}
+      <div className="scatter-understanding-row">
+        <button
+          type="button"
+          className="scatter-understanding-button"
+          onClick={() => setShowUnderstanding(true)}
+        >
+          <span className="understanding-icon">ⓘ</span>
+          Chart Understanding
+        </button>
+      </div>
 
       {/* CHART */}
       <div className="scatter-chart-wrapper" ref={wrapperRef}>
-
-        <svg
-          ref={svgRef}
-          className="scatter-svg"
-        />
+        <svg ref={svgRef} className="scatter-svg" />
 
         {!filteredData.length && !error && (
           <p className="scatter-empty">
@@ -546,68 +540,200 @@ function ScatterPlot({ data = [] }) {
         )}
 
         <div className="scatter-tooltip" />
-
       </div>
 
       {/* LEGEND */}
       <div className="scatter-legend">
-
-        {/* K-MEANS LEGEND */}
         <div className="legend-section">
-
           <strong className="scatter-legend-title">
             K-Means Cluster Membership
           </strong>
 
           <div className="legend-items">
-
             {clusterOptions.map((cluster) => (
               <div className="scatter-legend-item" key={cluster}>
-
                 <span
                   className="scatter-legend-dot"
-                  style={{
-                    backgroundColor: clusterColor(cluster),
-                  }}
+                  style={{ backgroundColor: clusterColor(cluster) }}
                 />
-
                 <span>Cluster {cluster}</span>
-
               </div>
             ))}
-
           </div>
         </div>
 
-        {/* DBSCAN LEGEND */}
         <div className="legend-section">
-
           <strong className="scatter-legend-title">
             DBSCAN Noise (Hollow Rings)
           </strong>
 
           <div className="legend-items">
-
             {clusterOptions.map((cluster) => (
               <div className="scatter-legend-item" key={cluster}>
-
                 <span
                   className="scatter-legend-ring"
-                  style={{
-                    borderColor: clusterColor(cluster),
-                  }}
+                  style={{ borderColor: clusterColor(cluster) }}
                 />
-
                 <span>Noise in Cluster {cluster}</span>
-
               </div>
             ))}
-
           </div>
         </div>
-
       </div>
 
+      {/* CHART UNDERSTANDING POPUP */}
+      {showUnderstanding && (
+        <div
+          className="scatter-modal-backdrop"
+          onClick={() => setShowUnderstanding(false)}
+        >
+          <div
+            className="scatter-understanding-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="scatter-understanding-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="scatter-modal-header">
+              <button
+                type="button"
+                className="scatter-modal-close"
+                onClick={() => setShowUnderstanding(false)}
+                aria-label="Close chart understanding"
+              >
+                ×
+              </button>
+
+              <span className="scatter-modal-eyebrow">CHART GUIDE</span>
+
+              <h2 id="scatter-understanding-title">
+                Understanding the Scatter Plot
+              </h2>
+            </div>
+
+            <div className="scatter-modal-content">
+              <section className="scatter-guide-section">
+                <h3>1. Understanding the Axes</h3>
+
+                <div className="scatter-guide-card">
+                  <strong>PC1 — Principal Component 1</strong>
+                  <p>
+                    PC1 captures the largest proportion of variation
+                    present in the original road-safety dataset. It
+                    represents a combination of the original features
+                    that explains more variation than any other single
+                    principal component.
+                  </p>
+                </div>
+
+                <div className="scatter-guide-card">
+                  <strong>PC2 — Principal Component 2</strong>
+                  <p>
+                    PC2 captures the second-largest proportion of
+                    variation in the dataset. It is mathematically
+                    uncorrelated with PC1, meaning it represents a
+                    different direction of variation in the data.
+                  </p>
+                </div>
+
+                <p>
+                  Principal Component Analysis (PCA) is a dimensionality
+                  reduction technique. It transforms multiple original
+                  road-safety variables into a smaller set of principal
+                  components. This chart displays the first two
+                  components so that patterns across the original
+                  multidimensional dataset can be explored visually.
+                </p>
+              </section>
+
+              <section className="scatter-guide-section">
+                <h3>2. Understanding the Points and Colours</h3>
+
+                <div className="scatter-guide-card">
+                  <strong>Each point represents an LGA</strong>
+                  <p>
+                    Every plotted point corresponds to one Local
+                    Government Area (LGA) observation in the dataset.
+                    Its position is determined by its PC1 and PC2 values.
+                  </p>
+                </div>
+
+                <div className="scatter-guide-card">
+                  <strong>Different colours — K-Means clusters</strong>
+                  <p>
+                    Each colour represents a K-Means cluster. K-Means
+                    groups observations into a predefined number of
+                    clusters based on similarities in their feature
+                    values. LGAs assigned to the same cluster share
+                    similar patterns according to the variables used
+                    for clustering.
+                  </p>
+                </div>
+
+                <div className="scatter-guide-card">
+                  <strong>Hollow markers — DBSCAN noise</strong>
+                  <p>
+                    Hollow markers identify observations labelled as
+                    noise by DBSCAN. DBSCAN identifies dense groups
+                    of observations based on distance and minimum
+                    neighbourhood requirements. A noise observation
+                    does not meet the density requirements to be
+                    assigned to a DBSCAN cluster.
+                  </p>
+                </div>
+
+                <div className="scatter-guide-card">
+                  <strong>Distance between points</strong>
+                  <p>
+                    Points positioned closer together generally have
+                    more similar characteristics in the displayed
+                    two-dimensional PCA representation. Points farther
+                    apart are more different in this representation.
+                    However, some information from the original
+                    multidimensional dataset may not be visible in
+                    only two components.
+                  </p>
+                </div>
+              </section>
+
+              <section className="scatter-guide-section">
+                <h3>3. Why Is This Chart Useful?</h3>
+                <p>
+                  The visualisation helps users identify patterns,
+                  similarities and differences between LGAs. It allows
+                  users to examine how areas are distributed, observe
+                  which LGAs are grouped together by K-Means, and
+                  identify observations that DBSCAN considers noise.
+                  These patterns can support further investigation
+                  of road-safety characteristics across different
+                  local areas.
+                </p>
+              </section>
+
+              <div className="scatter-guide-note">
+                <strong>Important Note</strong>
+                <p>
+                  PC1 and PC2 are calculated coordinates, not direct
+                  measurements of road crashes or road risk. A higher
+                  PC1 or PC2 value does not necessarily indicate
+                  higher road risk. The axes represent combinations
+                  of the original variables, and their interpretation
+                  depends on the PCA loadings.
+                </p>
+              </div>
+            </div>
+
+            <div className="scatter-modal-footer">
+              <button
+                type="button"
+                onClick={() => setShowUnderstanding(false)}
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
