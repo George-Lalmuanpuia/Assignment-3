@@ -1,0 +1,453 @@
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.cluster-profile-chart {
+  width: 100%;
+  margin-top: 30px;
+  padding: 28px;
+  box-sizing: border-box;
+
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+
+  box-shadow: 0 5px 22px rgba(15, 23, 42, 0.045);
+  color: var(--text-color, #1e293b);
+}
+
+/* =========================================
+   HEADER AND DESCRIPTION
+========================================= */
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.profile-header-content {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.profile-eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  color: #6366f1;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+}
+
+.profile-header h2 {
+  margin: 0;
+
+  color: var(--text-color, #1e293b);
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.6px;
+  text-align: center;
+}
+
+.profile-description {
+  max-width: 900px;
+  margin: 15px auto 0;
+
+  color: var(--text-secondary, #64748b);
+  font-size: 13px;
+  line-height: 1.85;
+  text-align: center;
+}
+
+/* =========================================
+   CLUSTER SELECTOR
+========================================= */
+
+.profile-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.profile-selector-label {
+  color: var(--text-secondary, #64748b);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cluster-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.cluster-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 10px 15px;
+
+  color: var(--text-color, #475569);
+  background: var(--card-bg, #ffffff);
+
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cluster-button:hover {
+  border-color: var(--cluster-color, #6366f1);
+  transform: translateY(-1px);
+}
+
+.cluster-button.active {
+  color: var(--cluster-color, #6366f1);
+  background: color-mix(
+    in srgb,
+    var(--cluster-color, #6366f1) 9%,
+    var(--card-bg, #ffffff)
+  );
+
+  border-color: var(--cluster-color, #6366f1);
+
+  box-shadow: 0 2px 8px
+    color-mix(
+      in srgb,
+      var(--cluster-color, #6366f1) 12%,
+      transparent
+    );
+}
+
+.cluster-button-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: var(--cluster-color, #64748b);
+}
+
+.all-dot {
+  background: linear-gradient(
+    135deg,
+    #64748b,
+    #94a3b8
+  );
+}
+
+/* =========================================
+   INSIGHT PANEL
+========================================= */
+
+.profile-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 16px 17px;
+  margin-bottom: 22px;
+
+  background: var(--insight-bg, #f5f7ff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-left: 3px solid #818cf8;
+  border-radius: 10px;
+}
+
+.profile-insight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 25px;
+  height: 25px;
+
+  color: #ffffff;
+  background: #818cf8;
+  border-radius: 50%;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.profile-insight strong {
+  display: block;
+  margin-bottom: 5px;
+
+  color: var(--text-color, #334155);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.profile-insight p {
+  margin: 0;
+
+  color: var(--text-secondary, #64748b);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+/* =========================================
+   CHART PANEL
+========================================= */
+
+.profile-chart-panel {
+  padding: 21px 20px 17px;
+
+  background: var(--profile-panel-bg, #fafbff);
+  border: 1px solid var(--border-color, #e8ebf2);
+  border-radius: 12px;
+}
+
+.profile-chart-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+.profile-chart-heading h3 {
+  margin: 0;
+
+  color: var(--text-color, #1e293b);
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.2px;
+}
+
+.profile-chart-heading p {
+  margin: 6px 0 0;
+
+  color: var(--text-secondary, #64748b);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.profile-chart-count {
+  flex-shrink: 0;
+
+  padding: 6px 9px;
+
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+/* =========================================
+   HORIZONTAL BAR CHART
+========================================= */
+
+.profile-chart-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.profile-chart-wrapper svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.profile-track {
+  fill: #e9edf5;
+}
+
+.profile-feature-label {
+  fill: var(--text-color, #475569);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.profile-bar {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.profile-value-label {
+  fill: var(--text-color, #334155);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+/* =========================================
+   TOOLTIP
+========================================= */
+
+.profile-tooltip {
+  position: absolute;
+  z-index: 10;
+
+  opacity: 0;
+  pointer-events: none;
+
+  padding: 9px 12px;
+
+  color: #ffffff;
+  background: #1e293b;
+
+  border: 1px solid #475569;
+  border-radius: 7px;
+
+  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.18);
+
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  transition: opacity 0.12s ease;
+}
+
+/* =========================================
+   CHART NOTE
+========================================= */
+
+.profile-chart-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  margin-top: 14px;
+
+  color: var(--text-secondary, #64748b);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.profile-note-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+
+  margin-top: 5px;
+
+  background: #818cf8;
+  border-radius: 50%;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.profile-empty {
+  padding: 35px 15px;
+
+  color: var(--text-secondary, #64748b);
+  background: var(--card-bg, #ffffff);
+
+  border: 1px dashed var(--border-color, #cbd5e1);
+  border-radius: 12px;
+
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+  .cluster-profile-chart {
+    padding: 22px;
+  }
+
+  .profile-header h2 {
+    font-size: 23px;
+  }
+
+  .profile-description {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .profile-chart-panel {
+    padding: 17px 14px;
+  }
+
+  .profile-feature-label {
+    font-size: 11px;
+  }
+
+  .profile-value-label {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 550px) {
+  .cluster-profile-chart {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .profile-header {
+    margin-bottom: 23px;
+  }
+
+  .profile-header h2 {
+    font-size: 20px;
+  }
+
+  .profile-description {
+    font-size: 11px;
+    line-height: 1.75;
+    margin-top: 12px;
+  }
+
+  .cluster-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cluster-button {
+    padding: 10px 7px;
+    font-size: 11px;
+  }
+
+  .profile-chart-heading {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .profile-chart-count {
+    align-self: flex-start;
+  }
+
+  .profile-chart-panel {
+    padding: 15px 9px;
+  }
+
+  .profile-chart-note {
+    font-size: 10px;
+  }
+}
