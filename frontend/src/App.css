@@ -85,104 +85,230 @@ body {
   width: 100%;
 }
 
+/* HERO SECTION */
+
 .hero {
-  background-color: #17365d;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+  background: linear-gradient(135deg, #17365d, #234e7c);
   color: white;
-  padding: 65px 45px;
-  border-radius: 12px;
-  text-align: center;
+  padding: 55px 50px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(23, 54, 93, 0.12);
+}
+
+.hero-content {
+  max-width: 600px;
 }
 
 .hero-label {
   color: #b9d7f5;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   letter-spacing: 2px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .hero h1 {
-  font-size: 38px;
-  max-width: 100%;
-  margin: 0 auto 20px;
-  text-align: center;
   color: white;
-  white-space: normal;
+  font-size: 40px;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .hero-description {
-  font-size: 17px;
-  line-height: 1.7;
-  max-width: 650px;
-  margin: 0 auto;
-  text-align: center;
+  font-size: 16px;
+  line-height: 1.8;
   color: #e0eaf5;
+  margin-bottom: 25px;
 }
 
 .hero-buttons {
-  margin-top: 28px;
+  margin-top: 25px;
 }
 
 .hero-buttons a {
   display: inline-block;
-  background-color: white;
+  background: white;
   color: #17365d;
-  padding: 12px 20px;
-  border-radius: 6px;
+  padding: 14px 24px;
+  border-radius: 7px;
   text-decoration: none;
   font-weight: bold;
+  transition: 0.3s ease;
 }
 
+.hero-buttons a:hover {
+  background: #dcecff;
+  transform: translateY(-3px);
+}
+
+.hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 28px;
+}
+
+.hero-highlights span {
+  color: #dcecff;
+  font-size: 12px;
+}
+
+/* HERO IMAGE */
+
+.hero-image {
+  width: 100%;
+  height: 350px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* OVERVIEW SECTION */
+
 .overview-section {
-  margin-top: 45px;
+  margin-top: 55px;
+}
+
+.overview-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-label {
+  color: #4779ad;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 
 .overview-section h2 {
-  font-size: 26px;
-  margin-bottom: 10px;
+  color: #17365d;
+  font-size: 28px;
+  margin-bottom: 12px;
 }
 
 .section-description {
   color: #666;
+  line-height: 1.7;
   margin-bottom: 25px;
 }
+
+/* FEATURE CARDS */
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 22px;
 }
 
 .feature-card {
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
   border: 1px solid #e1e5eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(23, 54, 93, 0.1);
+  border-color: #b9d7f5;
+}
+
+.feature-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf5ff;
+  border-radius: 10px;
+  font-size: 24px;
+  margin-bottom: 18px;
 }
 
 .feature-card h3 {
   color: #17365d;
+  font-size: 19px;
   margin-bottom: 12px;
 }
 
 .feature-card p {
   color: #666;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 14px;
+  min-height: 72px;
 }
 
-/* Home page responsive design */
+.card-link {
+  display: inline-block;
+  color: #315b89;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 15px;
+}
 
-@media (max-width: 768px) {
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
 
   .hero {
-    padding: 40px 25px;
+    grid-template-columns: 1fr;
+    padding: 40px 30px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero-image {
+    height: 300px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+
+  .hero {
+    padding: 35px 22px;
   }
 
   .hero h1 {
     font-size: 29px;
+  }
+
+  .hero-image {
+    height: 220px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-highlights {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
