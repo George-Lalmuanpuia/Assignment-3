@@ -11,7 +11,7 @@
 
 .cluster-explorer-page h1 {
   margin: 0;
-  color: var(--text-h);
+  color: black;
 }
 
 .scatter-section {
@@ -42,5 +42,158 @@
   .scatter-section,
   .profile-section {
     padding: 14px;
+  }
+}
+
+/* =========================================
+   CLUSTER EXPLORER INTRODUCTION
+========================================= */
+
+.cluster-introduction {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  background: #171b26;
+  border: 1px solid #303746;
+  border-radius: 14px;
+}
+
+.cluster-intro-heading {
+  text-align: center;
+  max-width: 950px;
+  margin: 0 auto 30px;
+}
+
+.cluster-intro-heading h2 {
+  font-size: 25px;
+  margin: 0 0 12px;
+  color: #ffffff;
+}
+
+.cluster-intro-heading p,
+.cluster-intro-subheading p {
+  color: #aeb8c9;
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.cluster-intro-subheading {
+  margin: 28px 0 18px;
+}
+
+.cluster-intro-subheading h3 {
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+/* CLUSTER CARDS */
+
+.cluster-intro-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.cluster-intro-card {
+  padding: 20px;
+  background: #202635;
+  border: 1px solid #354052;
+  border-radius: 11px;
+  min-width: 0;
+}
+
+.cluster-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cluster-card-title h4 {
+  font-size: 17px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.cluster-intro-card h5 {
+  font-size: 14px;
+  color: #e2e8f0;
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+
+.cluster-intro-card p {
+  font-size: 13px;
+  color: #aeb8c9;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* CLUSTER COLOUR INDICATORS */
+
+.cluster-color-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cluster-card-0 .cluster-color-dot {
+  background: #6366f1;
+}
+
+.cluster-card-1 .cluster-color-dot {
+  background: #0ea5e9;
+}
+
+.cluster-card-2 .cluster-color-dot {
+  background: #f59e0b;
+}
+
+/* IMPORTANT NOTE */
+
+.cluster-intro-note {
+  margin-top: 22px;
+  padding: 15px 18px;
+  background: #202635;
+  border-left: 3px solid #6366f1;
+  border-radius: 6px;
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.cluster-intro-note strong {
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .cluster-intro-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cluster-introduction {
+    padding: 20px 16px;
+  }
+
+  .cluster-intro-heading h2 {
+    font-size: 21px;
+  }
+
+  .cluster-intro-subheading h3 {
+    font-size: 16px;
+  }
+
+  .cluster-intro-card {
+    padding: 16px;
   }
 }
