@@ -243,6 +243,7 @@
   position: relative;/* Allows the tooltip to be positioned inside the chart. */
   width: 100%;
   min-height: 300px;
+  margin: 0 auto;
   overflow: hidden;/* Hides content outside the wrapper. */
   background: #171b26;
   border-radius: 8px;
