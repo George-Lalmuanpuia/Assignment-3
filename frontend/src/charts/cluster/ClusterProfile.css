@@ -83,10 +83,12 @@
   font-weight: 700;
 }
 
-.cluster-buttons {
+.cluster-selector {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 9px;
 }
 
 .cluster-button {
@@ -163,16 +165,19 @@
 
 .profile-insight {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 
-  padding: 16px 17px;
+  padding: 20px 22px;
   margin-bottom: 22px;
 
   background: var(--insight-bg, #f5f7ff);
   border: 1px solid var(--border-color, #e2e8f0);
   border-left: 3px solid #818cf8;
   border-radius: 10px;
+
+  text-align: center;
 }
 
 .profile-insight-icon {
@@ -194,21 +199,23 @@
 
 .profile-insight strong {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 
   color: var(--text-color, #334155);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 750;
+  text-align: center;
 }
 
 .profile-insight p {
-  margin: 0;
+  max-width: 850px;
+  margin: 0 auto;
 
   color: var(--text-secondary, #64748b);
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.75;
+  text-align: center;
 }
-
 /* =========================================
    CHART PANEL
 ========================================= */
