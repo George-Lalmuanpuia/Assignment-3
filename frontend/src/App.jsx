@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 
 import ClusterExplorer from "./pages/ClusterExplorer/ClusterExplorer";
+import About from "./pages/About/About";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("Home");
@@ -17,15 +18,15 @@ function App() {
       />
 
       <main className="main-content">
-        {currentPage === "Home" && <Home />}
+        {currentPage === "Home" && (
+        <Home setCurrentPage={setCurrentPage} />
+            )}
 
         {currentPage === "Risk Predictor" && <RiskPredictor />}
 
         {currentPage === "Cluster Explorer" && <ClusterExplorer />}
 
-        {currentPage === "About / Method" && (
-          <h1>About / Method</h1>
-        )}
+        {currentPage === "About / Method" && <About />}
       </main>
     </div>
   );
