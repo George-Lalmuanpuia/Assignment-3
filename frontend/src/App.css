@@ -1,4 +1,6 @@
 
+/* GLOBAL STYLING */
+
 * {
   margin: 0;
   padding: 0;
@@ -7,12 +9,14 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
-  color: #222;
+  background-color: #111827;
+  color: #e5e7eb;
 }
 
+/* NAVIGATION BAR */
+
 .navbar {
-  background-color: #17365d;
+  background-color: #171b26;
   color: white;
   padding: 18px 40px;
   display: flex;
@@ -20,6 +24,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
+  border-bottom: 1px solid #303746;
 }
 
 .logo {
@@ -36,7 +41,7 @@ body {
 .nav-links button {
   background: transparent;
   border: none;
-  color: white;
+  color: #cbd5e1;
   padding: 10px 14px;
   cursor: pointer;
   font-size: 15px;
@@ -44,43 +49,26 @@ body {
 
 .nav-links button:hover,
 .nav-links button.active {
-  background-color: #315b89;
+  background-color: #354052;
+  color: white;
   border-radius: 5px;
 }
+
+/* MAIN CONTENT */
 
 .main-content {
   padding: 50px 40px;
   min-height: 80vh;
+  background-color: #111827;
 }
 
 .main-content h1 {
   font-size: 30px;
+  color: white;
 }
 
-/* Responsive layout for mobile screens */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 18px 20px;
-  }
+/* HOME PAGE */
 
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .nav-links button {
-    text-align: left;
-    width: 100%;
-  }
-
-  .main-content {
-    padding: 30px 20px;
-  }
-}
-
-/* Home Page */
 .home-page {
   width: 100%;
 }
@@ -89,15 +77,18 @@ body {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: 40px;
-  background: linear-gradient(135deg, #17365d, #234e7c);
+  background:
+    radial-gradient(circle at 90% 15%, rgba(99, 102, 241, 0.20), transparent 35%),
+    linear-gradient(120deg, #171b26, #202b40);
   color: white;
   padding: 55px 50px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(23, 54, 93, 0.12);
+  border: 1px solid #303746;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .hero-content {
@@ -105,7 +96,7 @@ body {
 }
 
 .hero-label {
-  color: #b9d7f5;
+  color: #a5b4fc;
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 2px;
@@ -122,9 +113,11 @@ body {
 .hero-description {
   font-size: 16px;
   line-height: 1.8;
-  color: #e0eaf5;
+  color: #aeb8c9;
   margin-bottom: 25px;
 }
+
+/* HERO BUTTON */
 
 .hero-buttons {
   margin-top: 25px;
@@ -132,8 +125,8 @@ body {
 
 .hero-buttons a {
   display: inline-block;
-  background: white;
-  color: #17365d;
+  background: #6366f1;
+  color: white;
   padding: 14px 24px;
   border-radius: 7px;
   text-decoration: none;
@@ -142,9 +135,11 @@ body {
 }
 
 .hero-buttons a:hover {
-  background: #dcecff;
+  background: #818cf8;
   transform: translateY(-3px);
 }
+
+/* HERO HIGHLIGHTS */
 
 .hero-highlights {
   display: flex;
@@ -154,7 +149,7 @@ body {
 }
 
 .hero-highlights span {
-  color: #dcecff;
+  color: #cbd5e1;
   font-size: 12px;
 }
 
@@ -165,7 +160,7 @@ body {
   height: 350px;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .hero-image img {
@@ -187,7 +182,7 @@ body {
 }
 
 .section-label {
-  color: #4779ad;
+  color: #a5b4fc;
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 2px;
@@ -195,13 +190,13 @@ body {
 }
 
 .overview-section h2 {
-  color: #17365d;
+  color: white;
   font-size: 28px;
   margin-bottom: 12px;
 }
 
 .section-description {
-  color: #666;
+  color: #aeb8c9;
   line-height: 1.7;
   margin-bottom: 25px;
 }
@@ -210,30 +205,28 @@ body {
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
 }
 
 .feature-card {
-  background: white;
+  background: #202635;
+  color: #e5e7eb;
   padding: 28px;
   border-radius: 12px;
-  border: 1px solid #e1e5eb;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  border: 1px solid #354052;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(23, 54, 93, 0.1);
-  border-color: #b9d7f5;
-}
-
-.feature-card {
   cursor: pointer;
   text-align: left;
   font-family: Arial, sans-serif;
   width: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border-color: #6366f1;
 }
 
 .feature-icon {
@@ -242,20 +235,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #edf5ff;
+  background: #303653;
   border-radius: 10px;
   font-size: 24px;
   margin-bottom: 18px;
 }
 
 .feature-card h3 {
-  color: #17365d;
+  color: white;
   font-size: 19px;
   margin-bottom: 12px;
 }
 
 .feature-card p {
-  color: #666;
+  color: #aeb8c9;
   line-height: 1.7;
   font-size: 14px;
   min-height: 72px;
@@ -263,19 +256,66 @@ body {
 
 .card-link {
   display: inline-block;
-  color: #315b89;
+  color: #a5b4fc;
   font-size: 13px;
   font-weight: bold;
   margin-top: 15px;
 }
 
+/* RISK PREDICTOR PAGE */
+
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.page-description {
+  color: #aeb8c9;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.predictor-card {
+  background-color: #202635;
+  color: #e5e7eb;
+  padding: 30px;
+  margin: 30px auto 0;
+  border-radius: 10px;
+  border: 1px solid #354052;
+  max-width: 850px;
+}
+
+.predictor-card h2 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.predictor-card p {
+  color: #aeb8c9;
+  line-height: 1.6;
+}
+
 /* RESPONSIVE DESIGN */
 
+/* TABLET AND SMALLER LAPTOPS */
+
 @media (max-width: 900px) {
+
+  /* Main content */
+
+  .main-content {
+    padding: 35px 25px;
+  }
+
+  /* Hero section */
 
   .hero {
     grid-template-columns: 1fr;
     padding: 40px 30px;
+    gap: 25px;
   }
 
   .hero-content {
@@ -290,65 +330,141 @@ body {
     height: 300px;
   }
 
+  /* Feature cards */
+
   .feature-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Predictor */
+
+  .predictor-card {
+    padding: 25px;
   }
 }
 
+/* MOBILE DEVICES */
+
 @media (max-width: 600px) {
 
+  /* Navigation */
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .nav-links button {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Main content */
+
+  .main-content {
+    padding: 20px 15px;
+  }
+
+  .main-content h1 {
+    font-size: 25px;
+  }
+
+  /* Hero section */
+
   .hero {
-    padding: 35px 22px;
+    grid-template-columns: 1fr;
+    padding: 30px 20px;
+    gap: 25px;
+    border-radius: 10px;
   }
 
   .hero h1 {
-    font-size: 29px;
+    font-size: 27px;
   }
+
+  .hero-label {
+    font-size: 11px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* Hero image */
 
   .hero-image {
-    height: 220px;
+    height: 210px;
   }
 
-  .feature-grid {
-    grid-template-columns: 1fr;
+  /* Hero button */
+
+  .hero-buttons a {
+    padding: 12px 18px;
+    font-size: 14px;
   }
+
+  /* Hero highlights */
 
   .hero-highlights {
     flex-direction: column;
     gap: 10px;
   }
+
+  /* Overview section */
+
+  .overview-section {
+    margin-top: 35px;
+  }
+
+  .overview-section h2 {
+    font-size: 23px;
+  }
+
+  .section-description {
+    font-size: 14px;
+  }
+
+  /* Feature cards */
+
+  .feature-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+  }
+
+  .feature-card {
+    padding: 22px;
+  }
+
+  .feature-card p {
+    min-height: auto;
+  }
+
+  /* Risk Predictor */
+
+  .page-container {
+    padding: 0 5px;
+  }
+
+  .predictor-card {
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .page-description {
+    font-size: 14px;
+  }
 }
 
-/* Risk Predictor Page */
-.page-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
 
-.page-description {
-  color: #666;
-  margin-top: 12px;
-  line-height: 1.6;
-}
-
-.predictor-card {
-  background-color: white;
-  padding: 30px;
-  margin: 30px auto 0;
-  border-radius: 10px;
-  border: 1px solid #e1e5eb;
-  max-width: 850px;
-}
-
-.predictor-card h2 {
-  color: #17365d;
-  margin-bottom: 15px;
-}
-
-.predictor-card p {
-  color: #666;
-  line-height: 1.6;
-}
