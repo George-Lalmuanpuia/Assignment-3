@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import "./ClusterProfile.css";
 
+// The four road-safety features displayed in the bar chart.
 const FEATURES = [
   "Crash rate per 100k",
   "Severe %",
@@ -10,6 +11,7 @@ const FEATURES = [
   "Rural-road %",
 ];
 
+// Assigns a different colour to each feature in the bar chart.
 const FEATURE_COLORS = [
   "#6366f1",
   "#0ea5e9",
@@ -17,23 +19,29 @@ const FEATURE_COLORS = [
   "#10b981",
 ];
 
+// Converts a value into a number.
+// Returns null if the value is not a valid number.
 function getNumericValue(value) {
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
 }
 
+// Formats feature values for display beside the bars.
 function formatValue(feature, value) {
   if (value === null || value === undefined || !Number.isFinite(value)) {
     return "N/A";
   }
 
+  // Crash rate is displayed as a normal number.
   if (feature === "Crash rate per 100k") {
     return value.toFixed(2);
   }
 
+  // Other features are displayed as percentages.
   return `${value.toFixed(2)}%`;
 }
 
+// Makes sure cluster names are displayed consistently.
 function getClusterLabel(cluster) {
   const value = String(cluster);
 
@@ -43,13 +51,16 @@ function getClusterLabel(cluster) {
 }
 
 function ClusterProfile({ data = [] }) {
+
+  // References the SVG chart, chart container and tooltip.
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
   const tooltipRef = useRef(null);
 
+  // Stores the currently selected cluster.
   const [selectedCluster, setSelectedCluster] = useState("All");
 
-  // Find the column containing the cluster identifier.
+  // Finds the column containing the K-Means cluster identifier.
   const clusterKey = useMemo(() => {
     if (!data.length) return null;
 
@@ -60,7 +71,7 @@ function ClusterProfile({ data = [] }) {
     );
   }, [data]);
 
-  // Prepare cluster data and convert feature values to numbers.
+  // Prepares the chart data and converts feature values into numbers.
   const chartData = useMemo(() => {
     if (!data.length || !clusterKey) return [];
 
@@ -70,16 +81,18 @@ function ClusterProfile({ data = [] }) {
           cluster: String(row[clusterKey]),
         };
 
+        // Gets the numerical value for each road-safety feature.
         FEATURES.forEach((feature) => {
           result[feature] = getNumericValue(row[feature]);
         });
 
         return result;
       })
+      // Removes records without a valid cluster identifier.
       .filter((row) => row.cluster !== "undefined");
   }, [data, clusterKey]);
 
-  // Get the available cluster names.
+  // Gets all available cluster names from the chart data.
   const clusterOptions = useMemo(() => {
     return [...new Set(chartData.map((row) => row.cluster))].sort(
       (a, b) =>
@@ -90,7 +103,17 @@ function ClusterProfile({ data = [] }) {
     );
   }, [chartData]);
 
-  // Calculate the arithmetic mean of each feature across all LGA records.
+  // Uses the same cluster colour mapping as the scatter plot.
+  const clusterColor = useMemo(
+    () =>
+      d3
+        .scaleOrdinal()
+        .domain(clusterOptions)
+        .range(d3.schemeTableau10),
+    [clusterOptions]
+  );
+
+  // Calculates the average value of each feature across all LGA records.
   const averageProfile = useMemo(() => {
     return FEATURES.map((feature) => ({
       feature,
@@ -101,26 +124,33 @@ function ClusterProfile({ data = [] }) {
     }));
   }, [chartData]);
 
+  // Finds the data belonging to the currently selected cluster.
   const selectedProfile = chartData.find(
     (row) => row.cluster === selectedCluster
   );
 
-  // Show either the overall averages or the selected cluster's values.
+  // Displays overall averages or the selected cluster's values.
   const displayedData = useMemo(() => {
+
+    // Shows the overall averages when "All" is selected.
     if (selectedCluster === "All") {
       return averageProfile;
     }
 
+    // Returns an empty chart if the selected cluster has no data.
     if (!selectedProfile) return [];
 
+    // Gets the four feature values for the selected cluster.
     return FEATURES.map((feature) => ({
       feature,
       value: selectedProfile[feature],
     }));
   }, [selectedCluster, selectedProfile, averageProfile]);
 
-  // Use the same reference scale when switching between clusters.
+  // Sets the maximum value used to calculate each bar's length.
   const getFeatureMaximum = (feature) => {
+
+    // Uses the highest crash rate in the dataset as the maximum.
     if (feature === "Crash rate per 100k") {
       return Math.max(
         d3.max(chartData, (row) => row[feature]) || 1,
@@ -128,11 +158,14 @@ function ClusterProfile({ data = [] }) {
       );
     }
 
+    // Percentage features use 100 as their maximum.
     return 100;
   };
 
-  // Dynamic insight based on the selected view.
+  // Generates an explanation based on the selected cluster.
   const insight = useMemo(() => {
+
+    // Displays an explanation when all clusters are selected.
     if (selectedCluster === "All") {
       return {
         title: "Overall Cluster Averages",
@@ -141,6 +174,7 @@ function ClusterProfile({ data = [] }) {
       };
     }
 
+    // Displays a message if the selected cluster has no data.
     if (!selectedProfile) {
       return {
         title: "Cluster Profile",
@@ -148,28 +182,35 @@ function ClusterProfile({ data = [] }) {
       };
     }
 
+    // Calculates the average crash rate across all LGA records.
     const clusterAverage = d3.mean(
       chartData,
       (row) => row["Crash rate per 100k"]
     );
 
+    // Gets the crash rate of the selected cluster.
     const clusterCrashRate = selectedProfile["Crash rate per 100k"];
 
+    // Starts the explanation for the selected cluster.
     let description = `Showing the four feature values for ${getClusterLabel(
       selectedCluster
     )}.`;
 
+    // Compares the selected cluster's crash rate with the overall average.
     if (
       clusterCrashRate !== null &&
       clusterAverage !== undefined &&
       clusterAverage !== null
     ) {
       const difference = clusterCrashRate - clusterAverage;
+
+      // Calculates the percentage difference from the overall average.
       const percentageDifference =
         clusterAverage !== 0
           ? (Math.abs(difference) / clusterAverage) * 100
           : 0;
 
+      // Explains whether the crash rate is above, below or equal to average.
       if (difference > 0) {
         description += ` Its crash rate is ${percentageDifference.toFixed(
           1
@@ -189,18 +230,24 @@ function ClusterProfile({ data = [] }) {
     };
   }, [selectedCluster, selectedProfile, chartData]);
 
-  // Draw the horizontal bar chart.
+  // Draws and updates the horizontal bar chart using D3.
   useEffect(() => {
+
+    // Stops if the chart elements are not available.
     if (!svgRef.current || !wrapperRef.current) return;
 
+    // Selects the SVG element and clears the previous chart.
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
+    // Stops if there is no data to display.
     if (!displayedData.length) return;
 
+    // Sets the chart dimensions.
     const width = 900;
     const height = 350;
 
+    // Sets the spacing around the chart.
     const margin = {
       top: 20,
       right: 115,
@@ -208,29 +255,34 @@ function ClusterProfile({ data = [] }) {
       left: 190,
     };
 
+    // Calculates the available chart width and height.
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
+    // Sets the SVG chart dimensions and scaling behaviour.
     svg
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("preserveAspectRatio", "xMidYMid meet");
 
+    // Creates the main chart area inside the SVG.
     const chart = svg
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
+    // Creates a horizontal scale for the bar lengths.
     const x = d3
       .scaleLinear()
       .domain([0, 1])
       .range([0, chartWidth]);
 
+    // Creates a vertical scale to position the four features.
     const y = d3
       .scaleBand()
       .domain(FEATURES)
       .range([0, chartHeight])
       .padding(0.38);
 
-    // Subtle background tracks.
+    // Draws the background tracks behind each bar.
     chart
       .selectAll(".profile-track")
       .data(displayedData)
@@ -242,7 +294,7 @@ function ClusterProfile({ data = [] }) {
       .attr("height", y.bandwidth())
       .attr("rx", 7);
 
-    // Feature labels.
+    // Displays the feature names beside the bars.
     chart
       .selectAll(".profile-feature-label")
       .data(displayedData)
@@ -254,7 +306,7 @@ function ClusterProfile({ data = [] }) {
       .attr("dominant-baseline", "middle")
       .text((d) => d.feature);
 
-    // Horizontal bars.
+    // Creates the horizontal bars using the assigned feature colours.
     const bars = chart
       .selectAll(".profile-bar")
       .data(displayedData)
@@ -270,6 +322,7 @@ function ClusterProfile({ data = [] }) {
         (d) => FEATURE_COLORS[FEATURES.indexOf(d.feature)]
       );
 
+    // Animates the bars from zero to their calculated lengths.
     bars
       .transition()
       .duration(650)
@@ -277,13 +330,14 @@ function ClusterProfile({ data = [] }) {
       .attr("width", (d) => {
         if (d.value === null) return 0;
 
+        // Calculates the bar length using the feature's maximum value.
         const maximum = getFeatureMaximum(d.feature);
         const ratio = Math.max(0, Math.min(d.value / maximum, 1));
 
         return x(ratio);
       });
 
-    // Actual values beside each bar.
+    // Displays the actual measurement beside each bar.
     chart
       .selectAll(".profile-value-label")
       .data(displayedData)
@@ -292,6 +346,7 @@ function ClusterProfile({ data = [] }) {
       .attr("x", (d) => {
         if (d.value === null) return 8;
 
+        // Finds the position where the value should appear.
         const maximum = getFeatureMaximum(d.feature);
         const ratio = Math.max(0, Math.min(d.value / maximum, 1));
 
@@ -301,11 +356,14 @@ function ClusterProfile({ data = [] }) {
       .attr("dominant-baseline", "middle")
       .text((d) => formatValue(d.feature, d.value));
 
-    // Hover tooltip.
+    // Shows the tooltip when the mouse moves over a bar.
     bars
       .on("mouseenter", function (event, d) {
+
+        // Slightly fades the bar when hovered over.
         d3.select(this).attr("opacity", 0.82);
 
+        // Displays the feature name and its value.
         d3.select(tooltipRef.current)
           .style("opacity", 1)
           .text(
@@ -313,27 +371,36 @@ function ClusterProfile({ data = [] }) {
           );
       })
       .on("mousemove", function (event) {
+
+        // Gets the mouse position inside the chart container.
         const [mouseX, mouseY] = d3.pointer(
           event,
           wrapperRef.current
         );
 
+        // Moves the tooltip next to the mouse pointer.
         d3.select(tooltipRef.current)
           .style("left", `${mouseX + 14}px`)
           .style("top", `${mouseY - 12}px`);
       })
       .on("mouseleave", function () {
+
+        // Restores the bar's original appearance.
         d3.select(this).attr("opacity", 1);
 
+        // Hides the tooltip when the mouse leaves the bar.
         d3.select(tooltipRef.current)
           .style("opacity", 0);
       });
 
+    // Stops any unfinished chart animations when the chart updates.
     return () => {
       svg.selectAll("*").interrupt();
     };
+
   }, [displayedData, chartData]);
 
+  // Displays an error message if the required data is unavailable.
   if (!data.length || !clusterKey || !chartData.length) {
     return (
       <div className="cluster-profile-chart">
@@ -347,14 +414,20 @@ function ClusterProfile({ data = [] }) {
 
   return (
     <section className="cluster-profile-chart">
+
+      {/* Chart title and introduction. */}
       <div className="profile-header">
         <div className="profile-header-content">
+
+          {/* Small heading above the chart title. */}
           <span className="profile-eyebrow">
             CLUSTER ANALYSIS
           </span>
 
+          {/* Main chart title. */}
           <h2>Cluster Profile Comparison</h2>
 
+          {/* Explains the purpose of the cluster profile chart. */}
           <p className="profile-description">
             This bar chart presents a comparative analysis of
             road-safety characteristics across the identified
@@ -374,13 +447,17 @@ function ClusterProfile({ data = [] }) {
         </div>
       </div>
 
-      {/* Cluster selection buttons */}
+      {/* Cluster selection buttons. */}
       <div className="profile-selector">
+
+        {/* Label for the cluster selection area. */}
         <span className="profile-selector-label">
           Select a view
         </span>
 
         <div className="cluster-buttons">
+
+          {/* Displays the overall averages when All Clusters is selected. */}
           <button
             type="button"
             className={`cluster-button ${
@@ -393,9 +470,11 @@ function ClusterProfile({ data = [] }) {
             All Clusters
           </button>
 
-          {clusterOptions.map((cluster, index) => {
-            const color =
-              d3.schemeTableau10[index % d3.schemeTableau10.length];
+          {/* Creates one selection button for each available cluster. */}
+          {clusterOptions.map((cluster) => {
+
+            // Gets the same cluster colour used in the scatter plot.
+            const color = clusterColor(cluster);
 
             return (
               <button
@@ -407,10 +486,14 @@ function ClusterProfile({ data = [] }) {
                 style={{ "--cluster-color": color }}
                 onClick={() => setSelectedCluster(cluster)}
               >
+
+                {/* Displays the cluster's assigned colour. */}
                 <span
                   className="cluster-button-dot"
                   style={{ backgroundColor: color }}
                 />
+
+                {/* Displays the cluster name. */}
                 {getClusterLabel(cluster)}
               </button>
             );
@@ -418,26 +501,34 @@ function ClusterProfile({ data = [] }) {
         </div>
       </div>
 
-      {/* Dynamic insight */}
+      {/* Displays an explanation based on the selected view. */}
       <div className="profile-insight">
+
+        {/* Information icon. */}
         <div className="profile-insight-icon">i</div>
 
+        {/* Displays the insight title and explanation. */}
         <div>
           <strong>{insight.title}</strong>
           <p>{insight.description}</p>
         </div>
       </div>
 
-      {/* Horizontal bar chart */}
+      {/* Main horizontal bar chart panel. */}
       <div className="profile-chart-panel">
+
+        {/* Chart heading and feature count. */}
         <div className="profile-chart-heading">
           <div>
+
+            {/* Changes the heading based on the selected cluster. */}
             <h3>
               {selectedCluster === "All"
                 ? "Overall Cluster Averages"
                 : `${getClusterLabel(selectedCluster)} Feature Values`}
             </h3>
 
+            {/* Explains what the current chart is displaying. */}
             <p>
               {selectedCluster === "All"
                 ? "Average value of each feature across all LGA records"
@@ -445,20 +536,26 @@ function ClusterProfile({ data = [] }) {
             </p>
           </div>
 
+          {/* Displays the number of features in the chart. */}
           <span className="profile-chart-count">
             {FEATURES.length} FEATURES
           </span>
         </div>
 
+        {/* Container for the D3 chart and its tooltip. */}
         <div className="profile-chart-wrapper" ref={wrapperRef}>
+
+          {/* SVG element where D3 draws the horizontal bars. */}
           <svg ref={svgRef} />
 
+          {/* Tooltip that appears when hovering over a bar. */}
           <div
             className="profile-tooltip"
             ref={tooltipRef}
           />
         </div>
 
+        {/* Explains how bar lengths and measurements are displayed. */}
         <div className="profile-chart-note">
           <span className="profile-note-dot" />
           Bar lengths use feature-specific scales because crash
