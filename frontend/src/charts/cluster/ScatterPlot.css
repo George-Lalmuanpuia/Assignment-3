@@ -237,7 +237,7 @@
 }
 
 /* SCATTER PLOT CHART AND TOOLTIP */
-
+ 
 /* Holds the chart and tooltip. */
 .scatter-chart-wrapper {
   position: relative;/* Allows the tooltip to be positioned inside the chart. */

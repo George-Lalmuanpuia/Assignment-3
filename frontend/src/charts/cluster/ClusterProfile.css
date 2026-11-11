@@ -292,8 +292,8 @@
   margin: 0 auto;
   overflow: visible;
 }
-
-.profile-chart-wrapper svg {
+ 
+.profile-chart-wrapper svg {  
   display: block;
   width: 100%;
   height: auto;
