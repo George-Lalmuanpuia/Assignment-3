@@ -48,3 +48,15 @@ def get_lga_details(lga_name: str):
         "years_available": lga_data["Year"].tolist(),
         "data": results
     }
+
+# 5. Returns high-level stats for the Home page Dashboard
+@router.get("/api/summary", tags=["Data"])
+def get_app_summary():
+    if df is None:
+        raise HTTPException(status_code=500, detail="Data not loaded")
+    
+    return {
+        "total_lgas": int(df["LGA"].nunique()),
+        "total_years": int(df["Year"].nunique()),
+        "total_crashes": int(df["total_crashes"].sum())
+    }
