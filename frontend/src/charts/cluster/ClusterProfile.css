@@ -9,12 +9,20 @@
   padding: 28px;
   box-sizing: border-box;
 
-  background: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e5e7eb);
+  /* Uses the same dark navy theme as the scatter plot. */
+  --card-bg: #171b26;
+  --border-color: #303746;
+  --text-color: #ffffff;
+  --text-secondary: #bfc9d9;
+  --insight-bg: #202735;
+  --profile-panel-bg: #171b26;
+
+  background: #171b26;
+  border: 1px solid #303746;
   border-radius: 16px;
 
-  box-shadow: 0 5px 22px rgba(15, 23, 42, 0.045);
-  color: var(--text-color, #1e293b);
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
 }
 
 /* =========================================
@@ -40,7 +48,7 @@
   display: inline-block;
   margin-bottom: 10px;
 
-  color: #6366f1;
+  color: #8eafe9;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1.7px;
@@ -49,7 +57,7 @@
 .profile-header h2 {
   margin: 0;
 
-  color: var(--text-color, #1e293b);
+  color: #ffffff;
   font-size: 25px;
   font-weight: 750;
   letter-spacing: -0.6px;
@@ -60,7 +68,7 @@
   max-width: 900px;
   margin: 15px auto 0;
 
-  color: var(--text-secondary, #64748b);
+  color: #bfc9d9;
   font-size: 13px;
   line-height: 1.85;
   text-align: center;
@@ -78,15 +86,19 @@
 }
 
 .profile-selector-label {
-  color: var(--text-secondary, #64748b);
+  color: #dce2ec;
   font-size: 12px;
   font-weight: 700;
 }
 
+/* Centres the cluster selection buttons. */
+.cluster-selector,
 .cluster-buttons {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 9px;
 }
 
 .cluster-button {
@@ -97,10 +109,10 @@
 
   padding: 10px 15px;
 
-  color: var(--text-color, #475569);
-  background: var(--card-bg, #ffffff);
+  color: #eaf1ff;
+  background: #222938;
 
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid #424d60;
   border-radius: 9px;
 
   cursor: pointer;
@@ -118,24 +130,25 @@
 }
 
 .cluster-button:hover {
-  border-color: var(--cluster-color, #6366f1);
+  background: #303b4d;
+  border-color: var(--cluster-color, #7299e8);
   transform: translateY(-1px);
 }
 
 .cluster-button.active {
-  color: var(--cluster-color, #6366f1);
+  color: #ffffff;
   background: color-mix(
     in srgb,
-    var(--cluster-color, #6366f1) 9%,
-    var(--card-bg, #ffffff)
+    var(--cluster-color, #7299e8) 16%,
+    #222938
   );
 
-  border-color: var(--cluster-color, #6366f1);
+  border-color: var(--cluster-color, #7299e8);
 
   box-shadow: 0 2px 8px
     color-mix(
       in srgb,
-      var(--cluster-color, #6366f1) 12%,
+      var(--cluster-color, #7299e8) 18%,
       transparent
     );
 }
@@ -163,16 +176,19 @@
 
 .profile-insight {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 
-  padding: 16px 17px;
+  padding: 20px 22px;
   margin-bottom: 22px;
 
-  background: var(--insight-bg, #f5f7ff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-left: 3px solid #818cf8;
+  background: #202735;
+  border: 1px solid #394456;
+  border-left: 3px solid #91a8e8;
   border-radius: 10px;
+
+  text-align: center;
 }
 
 .profile-insight-icon {
@@ -185,7 +201,7 @@
   height: 25px;
 
   color: #ffffff;
-  background: #818cf8;
+  background: #496a9f;
   border-radius: 50%;
 
   font-size: 13px;
@@ -194,19 +210,22 @@
 
 .profile-insight strong {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 
-  color: var(--text-color, #334155);
-  font-size: 13px;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 750;
+  text-align: center;
 }
 
 .profile-insight p {
-  margin: 0;
+  max-width: 850px;
+  margin: 0 auto;
 
-  color: var(--text-secondary, #64748b);
+  color: #bfc9d9;
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.75;
+  text-align: center;
 }
 
 /* =========================================
@@ -216,8 +235,8 @@
 .profile-chart-panel {
   padding: 21px 20px 17px;
 
-  background: var(--profile-panel-bg, #fafbff);
-  border: 1px solid var(--border-color, #e8ebf2);
+  background: #202735;
+  border: 1px solid #394456;
   border-radius: 12px;
 }
 
@@ -233,7 +252,7 @@
 .profile-chart-heading h3 {
   margin: 0;
 
-  color: var(--text-color, #1e293b);
+  color: #ffffff;
   font-size: 16px;
   font-weight: 750;
   letter-spacing: -0.2px;
@@ -242,7 +261,7 @@
 .profile-chart-heading p {
   margin: 6px 0 0;
 
-  color: var(--text-secondary, #64748b);
+  color: #bfc9d9;
   font-size: 11px;
   line-height: 1.5;
 }
@@ -252,9 +271,9 @@
 
   padding: 6px 9px;
 
-  color: #64748b;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  color: #dce2ec;
+  background: #293447;
+  border: 1px solid #424d60;
   border-radius: 6px;
 
   font-size: 9px;
@@ -279,23 +298,27 @@
   overflow: visible;
 }
 
+/* Dark tracks behind the coloured bars. */
 .profile-track {
-  fill: #e9edf5;
+  fill: #303746;
 }
 
+/* Labels beside each feature bar. */
 .profile-feature-label {
-  fill: var(--text-color, #475569);
+  fill: #dce2ec;
   font-size: 13px;
   font-weight: 650;
 }
 
+/* Styles the horizontal bars. */
 .profile-bar {
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
 
+/* Displays the values at the end of each bar. */
 .profile-value-label {
-  fill: var(--text-color, #334155);
+  fill: #ffffff;
   font-size: 12px;
   font-weight: 750;
 }
@@ -314,12 +337,12 @@
   padding: 9px 12px;
 
   color: #ffffff;
-  background: #1e293b;
+  background: #252e3d;
 
-  border: 1px solid #475569;
+  border: 1px solid #52617a;
   border-radius: 7px;
 
-  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
 
   font-size: 11px;
   font-weight: 600;
@@ -339,7 +362,7 @@
 
   margin-top: 14px;
 
-  color: var(--text-secondary, #64748b);
+  color: #bfc9d9;
   font-size: 11px;
   line-height: 1.65;
 }
@@ -351,7 +374,7 @@
 
   margin-top: 5px;
 
-  background: #818cf8;
+  background: #91a8e8;
   border-radius: 50%;
 }
 
@@ -362,10 +385,10 @@
 .profile-empty {
   padding: 35px 15px;
 
-  color: var(--text-secondary, #64748b);
-  background: var(--card-bg, #ffffff);
+  color: #bfc9d9;
+  background: #202735;
 
-  border: 1px dashed var(--border-color, #cbd5e1);
+  border: 1px dashed #424d60;
   border-radius: 12px;
 
   text-align: center;
@@ -424,7 +447,8 @@
     margin-top: 12px;
   }
 
-  .cluster-buttons {
+  .cluster-buttons,
+  .cluster-selector {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

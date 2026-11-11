@@ -1,0 +1,166 @@
+
+.about-page {
+  width: 100%;
+}
+
+/* Page Header */
+.about-header {
+  background-color: #17365d;
+  color: white;
+  padding: 45px 35px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.about-header h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.about-header p {
+  color: #e0eaf5;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* General Sections */
+.about-section {
+  margin-bottom: 35px;
+}
+
+.about-section h2 {
+  color: #17365d;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.about-section > p {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+/* Project Objective Cards */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.about-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e1e5eb;
+}
+
+.about-card h3 {
+  color: #17365d;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.about-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* Methodology */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.method-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e1e5eb;
+}
+
+.method-card h3 {
+  color: #17365d;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.method-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* System Features */
+.about-list {
+  background-color: white;
+  padding: 25px 25px 25px 45px;
+  border-radius: 10px;
+  border: 1px solid #e1e5eb;
+}
+
+.about-list li {
+  color: #555;
+  line-height: 2;
+  padding-left: 5px;
+}
+
+/* Limitations */
+.limitations-section {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e1e5eb;
+}
+
+/* Tablet Responsive */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-header {
+    padding: 35px 20px;
+  }
+
+  .about-header h1 {
+    font-size: 27px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-header {
+    padding: 30px 20px;
+  }
+
+  .about-header h1 {
+    font-size: 25px;
+  }
+
+  .about-header p {
+    font-size: 14px;
+  }
+
+  .about-section h2 {
+    font-size: 22px;
+  }
+
+  .about-card,
+  .method-card {
+    padding: 20px;
+  }
+}

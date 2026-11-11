@@ -1,31 +1,246 @@
 
+/*MAIN PAGE*/
+
 .cluster-explorer-page {
   display: flex;
+  flex-direction: column; /* Places all page sections vertically. */
+  gap: 24px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;/* Includes padding in the total element width. */
+}
+
+
+/* PAGE HEADER TITLE*/
+
+.cluster-page-header {
+  width: 100%;
+  padding: 34px 38px;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevents content from overflowing out of the page */
+
+
+  /* for title background colour gradiant  */
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(99, 102, 241, 0.20),
+      transparent 35% 
+    ),
+    linear-gradient(120deg, #171b26, #202b40); /* Creates the dark gradient background. */
+  border: 1px solid #303746;
+  border-radius: 16px;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08);
+}
+
+/* Centres all content inside the page header. */
+.cluster-page-header-content {
+  display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 30px;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
 }
 
-.cluster-explorer-page h1 {
+/* The label above the main page title css. */
+.cluster-page-eyebrow {
+  display: inline-block; /*allows it to be stacked above the title */
+  margin-bottom: 13px;
+  color: #a5b4fc;
+  font-size: 10px;
+  font-weight: 800; /*bold text */
+  letter-spacing: 2px;
+}
+
+/* Main Cluster Explorer title. */
+.cluster-page-header h1 {
   margin: 0;
-  color: var(--text-h);
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
 }
 
-.scatter-section {
-  display: block;
+/* Short description underneath the page title. */
+.cluster-page-header p {
   width: 100%;
-  padding: 24px;
-  box-sizing: border-box;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  max-width: 650px;
+  margin: 13px auto 20px;
+  color: #c1cada;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
+
+/* CLUSTER EXPLORER DESCRIPTION */
+
+.cluster-introduction {
+  width: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background: #171b26;
+  border: 1px solid #303746;
+  border-radius: 14px;
+}
+
+
+/* INTRODUCTION HEADING AND SUBHEADINGS*/
+
+.cluster-intro-heading {
+  max-width: 950px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.cluster-intro-heading h2 {
+  margin: 0 0 13px;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+
+/*INTRODUCTION SUBHEADINGS ON THE KMEAN AND EXPLORATION DATA DESCIPTION*/
+
+.cluster-intro-subheading {
+  margin: 30px 0 18px;
+  text-align: center;
+}
+
+.cluster-intro-subheading h3 {
+  margin: 0 0 11px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+/* Description text styling for paragraphs */
+.cluster-intro-heading p,
+.cluster-intro-subheading p {
+  margin: 0;
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+
+/*CLUSTER CARDS*/
+
+.cluster-intro-cards {
+  display: grid; /* arrange the cluster cards horizontally */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Creates three equally sized columns*/
+  gap: 18px;
+  margin-top: 24px;
+}
+
+
+/* Individual card containing each cluster's characteristics. */
+.cluster-intro-card {
+  display: flex;
+  flex-direction: column;/* Places the card content vertically. */
+  min-width: 0; /* Allows the card to shrink without overflowing its grid column. */
+  padding: 22px;
+  background: #202635;
+  border: 1px solid #354052;
+  border-radius: 11px;
+
+  /* animation when hovering over a card. */
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* highlights its border on hover and the movements of it. */
+.cluster-intro-card:hover {
+  transform: translateY(-3px);
+  border-color: #596780;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+/* Centres the cluster number and its colour indicator. */
+.cluster-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+/* Cluster number heading. */
+.cluster-card-title h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+/* Short title describing the cluster's characteristics. */
+.cluster-intro-card h5 {
+  margin: 11px;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+/* Detailed description inside each cluster card. */
+.cluster-intro-card p {
+  color: #aeb8c9;
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+
+/*CLUSTER COLOUR INDICATORS */
+
+/* Base appearance for all dots colours */
+.cluster-color-dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+/* Cluster 0 uses BLUE. */
+.cluster-card-0 .cluster-color-dot {
+  background: #0ea5e9;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4); /*add glwoing effect*/
+}
+
+/* Cluster 1 uses ORANGE. */
+.cluster-card-1 .cluster-color-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+/* Cluster 2 uses RED. */
+.cluster-card-2 .cluster-color-dot {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+
+/* IMPORTANT NOTE SECTION */
+
+.cluster-intro-note {
+  margin-top: 24px;
+  padding: 15px 18px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.18);
+  border-left: 3px solid #818cf8;
+  border-radius: 7px;
+  color: #b9c3d4;
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+
+/* CHART SECTIONS: TO gice fixed background spacing an borders for ech chart */
+.scatter-section,
 .profile-section {
-  display: block;
   width: 100%;
   padding: 24px;
   box-sizing: border-box;
@@ -33,14 +248,99 @@
   border: 1px solid var(--border);
   border-radius: 12px;
 }
+
+
+/*TABLET RESPONSIVENESS */
 
 @media (max-width: 768px) {
-  .cluster-explorer-page {
-    padding: 12px;
+
+  /* Stacks the cluster cards vertically. */
+  .cluster-intro-cards {
+    grid-template-columns: 1fr;
   }
 
+  .cluster-explorer-page {
+    padding: 14px;
+    gap: 20px;
+  }
+
+
+  .cluster-page-header {
+    padding: 24px;
+  }
+
+  .cluster-page-header h1 {
+    font-size: 29px;
+  }
+
+  
+  .cluster-introduction {
+    padding: 24px;
+  }
+
+  /* Reduces chart section spacing. */
   .scatter-section,
   .profile-section {
     padding: 14px;
+  }
+}
+
+
+/*MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+
+  /* Reduces page spacing  */
+  .cluster-explorer-page {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  /* Adjusts the header */
+  .cluster-page-header {
+    padding: 20px 16px;
+  }
+
+  .cluster-page-header h1 {
+    font-size: 25px;
+  }
+
+  .cluster-page-header p {
+    font-size: 12px;
+  }
+
+  /* Reduces introduction spacing and heading sizes. */
+  .cluster-introduction {
+    padding: 20px 16px;
+  }
+
+  .cluster-intro-heading h2 {
+    font-size: 21px;
+  }
+
+  .cluster-intro-subheading h3 {
+    font-size: 16px;
+  }
+
+  .cluster-intro-heading p,
+  .cluster-intro-subheading p {
+    font-size: 12px;
+  }
+
+
+  .cluster-intro-card {
+    padding: 18px;
+  }
+
+  /* Makes the important note more compact. */
+  .cluster-intro-note {
+    padding: 13px;
+    font-size: 11px;
+  }
+
+  /* Reduces chart section padding. */
+  .scatter-section,
+  .profile-section {
+    padding: 10px;
   }
 }
