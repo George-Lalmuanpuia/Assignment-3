@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CrashRiskModel from "../../charts/classification/CrashRiskModel";
+import CrashRiskModel from "../charts/classification/CrashRiskModel";
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
