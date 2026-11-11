@@ -1,5 +1,5 @@
 
-function Home() {
+function Home({ onNavigate }) {
   return (
     <div className="home-page">
 
@@ -22,18 +22,15 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-            <a href="#" onClick={(e) => {
-              e.preventDefault();
-              window.dispatchEvent(new Event("open-predictor"));
-            }}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("Risk Predictor");
+              }}
+            >
               Explore Risk Predictor →
             </a>
-          </div>
-
-          <div className="hero-highlights">
-            <span>✓ Data Analytics</span>
-            <span>✓ Machine Learning</span>
-            <span>✓ Road Safety Insights</span>
           </div>
         </div>
 
@@ -60,7 +57,11 @@ function Home() {
 
         <div className="feature-grid">
 
-          <div className="feature-card">
+          {/* Risk Predictor Card */}
+          <button
+            className="feature-card"
+            onClick={() => onNavigate("Risk Predictor")}
+          >
             <div className="feature-icon">📊</div>
             <h3>Risk Predictor</h3>
             <p>
@@ -70,9 +71,13 @@ function Home() {
             <span className="card-link">
               Risk Analysis →
             </span>
-          </div>
+          </button>
 
-          <div className="feature-card">
+          {/* Cluster Explorer Card */}
+          <button
+            className="feature-card"
+            onClick={() => onNavigate("Cluster Explorer")}
+          >
             <div className="feature-icon">📍</div>
             <h3>Cluster Explorer</h3>
             <p>
@@ -82,11 +87,15 @@ function Home() {
             <span className="card-link">
               Data Exploration →
             </span>
-          </div>
+          </button>
 
-          <div className="feature-card">
+          {/* About Card */}
+          <button
+            className="feature-card"
+            onClick={() => onNavigate("About")}
+          >
             <div className="feature-icon">📚</div>
-            <h3>About / Method</h3>
+            <h3>About</h3>
             <p>
               Learn about the dataset, analytical methods,
               machine learning models and project limitations.
@@ -94,7 +103,7 @@ function Home() {
             <span className="card-link">
               Learn More →
             </span>
-          </div>
+          </button>
 
         </div>
       </section>
@@ -104,5 +113,6 @@ function Home() {
 }
 
 export default Home;
+
 
 

@@ -4,7 +4,7 @@ function Navbar({ currentPage, setCurrentPage }) {
     "Home",
     "Risk Predictor",
     "Cluster Explorer",
-    "About / Method"
+    "About"
   ];
 
   return (
