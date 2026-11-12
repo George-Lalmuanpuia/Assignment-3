@@ -56,7 +56,7 @@ function ClusterExplorer() {
 
       {/* PAGE HEADER */}
       <header className="cluster-page-header">
-        <div className="cluster-page-header-content"> //BOX
+        <div className="cluster-page-header-content"> {/*BOX*/} 
           <span className="cluster-page-eyebrow">
             ROAD SAFETY ANALYTICS
           </span>

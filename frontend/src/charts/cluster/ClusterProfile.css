@@ -1,15 +1,13 @@
 
-/* =========================================
-   MAIN CONTAINER
-========================================= */
 
+/*Controls the main container for the Cluster Profile chart.*/
 .cluster-profile-chart {
   width: 100%;
   margin-top: 30px;
   padding: 28px;
   box-sizing: border-box;
 
-  /* Uses the same dark navy theme as the scatter plot. */
+  /* DEFINING COLOUR VARIABLES */
   --card-bg: #171b26;
   --border-color: #303746;
   --text-color: #ffffff;
@@ -20,17 +18,15 @@
   background: #171b26;
   border: 1px solid #303746;
   border-radius: 16px;
-
   box-shadow: 0 5px 22px rgba(0, 0, 0, 0.2);
   color: #ffffff;
 }
 
-/* =========================================
-   HEADER AND DESCRIPTION
-========================================= */
+/*HEADER AND DESCRIPTION*/
 
+/* Centres the chart heading and controls its bottom spacing. */
 .profile-header {
-  display: flex;
+  display: flex;/* Uses Flexbox to arrange the header content. */
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -38,25 +34,25 @@
   text-align: center;
 }
 
+/* Limits the header content width and keeps it centred. */
 .profile-header-content {
   width: 100%;
   max-width: 950px;
   margin: 0 auto;
 }
 
+/* Styles the small introductory label above the main heading. */
 .profile-eyebrow {
-  display: inline-block;
+  display: inline-block;/* Allows the label to have its own spacing. */
   margin-bottom: 10px;
-
   color: #8eafe9;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1.7px;
 }
 
+/* Controls the appearance and alignment of the main chart title. */
 .profile-header h2 {
-  margin: 0;
-
   color: #ffffff;
   font-size: 25px;
   font-weight: 750;
@@ -64,20 +60,20 @@
   text-align: center;
 }
 
+/* Controls the description width, spacing and text appearance. */
 .profile-description {
   max-width: 900px;
   margin: 15px auto 0;
-
   color: #bfc9d9;
   font-size: 13px;
   line-height: 1.85;
   text-align: center;
 }
 
-/* =========================================
-   CLUSTER SELECTOR
-========================================= */
+/*CLUSTER SELECTOR */
 
+
+/* Arranges the cluster selector label and buttons vertically. */
 .profile-selector {
   display: flex;
   flex-direction: column;
@@ -85,13 +81,14 @@
   margin-bottom: 22px;
 }
 
+/* Styles the label above the cluster selection buttons. */
 .profile-selector-label {
   color: #dce2ec;
   font-size: 12px;
   font-weight: 700;
 }
 
-/* Centres the cluster selection buttons. */
+/* Centres the cluster buttons and allows them to wrap onto another row. */
 .cluster-selector,
 .cluster-buttons {
   display: flex;
@@ -101,26 +98,21 @@
   flex-wrap: wrap;
 }
 
+/* Controls the appearance, spacing and interaction of cluster buttons. */
 .cluster-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-
   padding: 10px 15px;
-
   color: #eaf1ff;
   background: #222938;
-
   border: 1px solid #424d60;
   border-radius: 9px;
-
   cursor: pointer;
-
-  font-family: inherit;
+  font-family: inherit;/* Uses the same font as the surrounding page. */
   font-size: 12px;
   font-weight: 600;
-
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -129,23 +121,24 @@
     box-shadow 0.2s ease;
 }
 
+/* Changes the button background, border and position on hover. */
 .cluster-button:hover {
   background: #303b4d;
-  border-color: var(--cluster-color, #7299e8);
-  transform: translateY(-1px);
+  border-color: var(--cluster-color, #7299e8); /* Changes the border to the cluster colour. */
+  transform: translateY(-1px);/* Moves the button slightly upwards. */
 }
 
+/* Highlights the currently selected cluster button. */
 .cluster-button.active {
   color: #ffffff;
   background: color-mix(
-    in srgb,
-    var(--cluster-color, #7299e8) 16%,
-    #222938
-  );
-
+  in srgb,
+  var(--cluster-color, #7299e8) 16%,
+ #222938
+  ); /* Mixes the cluster colour with the button background. */
   border-color: var(--cluster-color, #7299e8);
 
-  box-shadow: 0 2px 8px
+  box-shadow: 0 2px 8px  /* Adds a subtle shadow using the cluster colour. */
     color-mix(
       in srgb,
       var(--cluster-color, #7299e8) 18%,
@@ -153,255 +146,226 @@
     );
 }
 
+/* Creates the coloured circular indicator inside each cluster button. */
 .cluster-button-dot {
   width: 9px;
   height: 9px;
-  flex-shrink: 0;
-
+  flex-shrink: 0;/* Prevents the indicator from becoming smaller. */
   border-radius: 50%;
-  background: var(--cluster-color, #64748b);
+  background: var(--cluster-color, #64748b);/* Uses the cluster's assigned colour. */
 }
 
+/* Gives the All Clusters button a gradient-coloured indicator. */
 .all-dot {
-  background: linear-gradient(
-    135deg,
-    #64748b,
-    #94a3b8
-  );
+  background: linear-gradient(135deg, #64748b, #94a3b8);
 }
 
-/* =========================================
-   INSIGHT PANEL
-========================================= */
+/*INSIGHT PANEL*/
 
+/* Arranges and styles the panel containing the cluster analysis insight. */
 .profile-insight {
-  display: flex;
+  display: flex; /* Uses Flexbox to arrange the panel content. */
   flex-direction: column;
   align-items: center;
   gap: 10px;
-
   padding: 20px 22px;
   margin-bottom: 22px;
-
   background: #202735;
   border: 1px solid #394456;
   border-left: 3px solid #91a8e8;
   border-radius: 10px;
-
   text-align: center;
 }
 
+/* Creates and centres the circular icon in the insight panel. */
 .profile-insight-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-
+  flex-shrink: 0;/* Prevents the icon from becoming smaller. */
   width: 25px;
   height: 25px;
-
   color: #ffffff;
   background: #496a9f;
   border-radius: 50%;
-
   font-size: 13px;
   font-weight: 800;
 }
 
+/* Styles the heading inside the insight panel. */
 .profile-insight strong {
-  display: block;
+  display: block;/* Places the heading on its own line. */
   margin-bottom: 7px;
-
   color: #ffffff;
   font-size: 14px;
   font-weight: 750;
   text-align: center;
 }
 
+/* Controls the width, spacing and appearance of the insight explanation. */
 .profile-insight p {
   max-width: 850px;
-  margin: 0 auto;
-
+  margin: 0 auto;/* Centres the explanation horizontally. */
   color: #bfc9d9;
   font-size: 12px;
   line-height: 1.75;
   text-align: center;
 }
 
-/* =========================================
-   CHART PANEL
-========================================= */
+/*CHART PANEL*/
 
+/* Creates the panel surrounding the horizontal bar chart. */
 .profile-chart-panel {
-  padding: 21px 20px 17px;
-
+  padding: 21px 20px 17px;/* Adds space inside the chart panel. */
   background: #202735;
   border: 1px solid #394456;
   border-radius: 12px;
 }
 
+/* Positions the chart title and record count within the panel. */
 .profile-chart-heading {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-between;/* Places the title and count at opposite ends. */
   gap: 15px;
-
   margin-bottom: 18px;
 }
 
+/* Styles the title displayed above the bar chart. */
 .profile-chart-heading h3 {
   margin: 0;
-
   color: #ffffff;
   font-size: 16px;
   font-weight: 750;
   letter-spacing: -0.2px;
 }
 
+/* Styles the explanatory text below the chart title. */
 .profile-chart-heading p {
   margin: 6px 0 0;
-
   color: #bfc9d9;
   font-size: 11px;
   line-height: 1.5;
 }
 
+/* Styles the label displaying the number of chart records. */
 .profile-chart-count {
   flex-shrink: 0;
-
   padding: 6px 9px;
-
   color: #dce2ec;
   background: #293447;
   border: 1px solid #424d60;
   border-radius: 6px;
-
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.7px;
 }
 
-/* =========================================
-   HORIZONTAL BAR CHART
-========================================= */
+/*HORIZONTAL BAR CHART */
 
+/* Controls the chart area width and keeps the SVG centred. */
 .profile-chart-wrapper {
   position: relative;
   width: 100%;
   max-width: 900px;
-  margin: 0 auto;
-  overflow: visible;
+  margin: 0 auto; /* Centres the chart wrapper horizontally. */
+  overflow: visible;/* Allows chart content outside the wrapper to remain visible. */
 }
- 
-.profile-chart-wrapper svg {  
+
+
+/* Makes the SVG chart fit the available space while maintaining its proportions. */
+.profile-chart-wrapper svg {
   display: block;
   width: 100%;
   height: auto;
-  overflow: visible;
+  overflow: visible;/* Allows SVG elements outside its boundaries to remain visible. */
 }
 
-/* Dark tracks behind the coloured bars. */
+/* Styles the background tracks behind the coloured bars. */
 .profile-track {
   fill: #303746;
 }
 
-/* Labels beside each feature bar. */
+/* Styles the feature names displayed beside the horizontal bars. */
 .profile-feature-label {
   fill: #dce2ec;
   font-size: 13px;
   font-weight: 650;
 }
 
-/* Styles the horizontal bars. */
+/* Controls the appearance and hover interaction of the horizontal bars. */
 .profile-bar {
-  cursor: pointer;
-  transition: opacity 0.2s ease;
+  cursor: pointer; /* Shows a pointer when hovering over a bar. */
+  transition: opacity 0.2s ease;/* Smoothly animates changes to the bar. */
 }
 
-/* Displays the values at the end of each bar. */
+/* Styles the numerical values displayed at the end of each bar. */
 .profile-value-label {
   fill: #ffffff;
   font-size: 12px;
   font-weight: 750;
 }
 
-/* =========================================
-   TOOLTIP
-========================================= */
+/* TOOLTIP */
 
+/* Controls the appearance and positioning of the information popup on hover. */
 .profile-tooltip {
-  position: absolute;
-  z-index: 10;
-
-  opacity: 0;
-  pointer-events: none;
-
+  position: absolute;/* Positions the tooltip relative to its parent. */
+  z-index: 10;/* Displays the tooltip above other elements. */
+  opacity: 0;/* Hides the tooltip by default. */
+  pointer-events: none;/* Prevents the tooltip from blocking mouse interactions. */
   padding: 9px 12px;
-
   color: #ffffff;
   background: #252e3d;
-
   border: 1px solid #52617a;
   border-radius: 7px;
-
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);/* Adds a shadow around the tooltip. */
   font-size: 11px;
   font-weight: 600;
-  white-space: nowrap;
-
+  white-space: nowrap;/* Keeps the tooltip text on one line. */
   transition: opacity 0.12s ease;
 }
 
-/* =========================================
-   CHART NOTE
-========================================= */
+/*CHART NOTE*/
 
+/* Positions the explanatory note and its indicator below the chart. */
 .profile-chart-note {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start;/* Aligns the note content at the top. */
   gap: 9px;
-
   margin-top: 14px;
-
   color: #bfc9d9;
   font-size: 11px;
   line-height: 1.65;
 }
 
+/* Creates the small circular indicator beside the chart note. */
 .profile-note-dot {
   width: 7px;
   height: 7px;
-  flex-shrink: 0;
-
+  flex-shrink: 0;/* Prevents the indicator from becoming smaller. */
   margin-top: 5px;
-
   background: #91a8e8;
   border-radius: 50%;
 }
 
-/* =========================================
-   EMPTY STATE
-========================================= */
+/*EMPTY STATE*/
 
+/* Styles the message displayed when no chart data is available. */
 .profile-empty {
   padding: 35px 15px;
-
   color: #bfc9d9;
   background: #202735;
-
   border: 1px dashed #424d60;
   border-radius: 12px;
-
   text-align: center;
   font-size: 13px;
   line-height: 1.6;
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/*RESPONSIVENESS FOR MOBILE AND IPAD */
 
+/* Adjusts the chart layout and text sizes for screens 800px or smaller. */
 @media (max-width: 800px) {
   .cluster-profile-chart {
     padding: 22px;
@@ -429,6 +393,7 @@
   }
 }
 
+/* Further adjusts the layout for phone screens 550px or smaller. */
 @media (max-width: 550px) {
   .cluster-profile-chart {
     padding: 16px;
@@ -449,6 +414,7 @@
     margin-top: 12px;
   }
 
+  /* Displays the cluster selection buttons in a two-column grid. */
   .cluster-buttons,
   .cluster-selector {
     display: grid;
@@ -460,6 +426,7 @@
     font-size: 11px;
   }
 
+  /* Stacks the chart heading and record count vertically. */
   .profile-chart-heading {
     flex-direction: column;
     gap: 9px;
