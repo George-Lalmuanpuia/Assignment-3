@@ -23,7 +23,7 @@ def predict_risk(data: RiskRequest):
         "risk_level": result["risk_level"],
         "probability": result["probability"],
         "threshold_used": result["threshold"],
-        "inputs_received": data.dict()
+        "inputs_received": data.model_dump()
     }
 
 # --- CHART ENDPOINTS Risk Predictor'S PAGE ---
