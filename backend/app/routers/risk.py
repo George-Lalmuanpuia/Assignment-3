@@ -16,7 +16,7 @@ def predict_risk(data: RiskRequest):
         data.population,
         data.severe_pct,
         data.wet_weather_pct,
-        data.rural_road_pct
+        data.avg_speed_limit
     )
     
     return {
