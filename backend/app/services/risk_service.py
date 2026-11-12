@@ -14,7 +14,7 @@ except Exception as e:
     logger.warning(f"Could not load risk model (is it missing?): {e}")
     risk_bundle = None
 
-def predict_lga_risk(population, severe, wet, rural):
+def predict_lga_risk(population, severe, wet, speed):
     if risk_bundle is None:
         # Fallback mock data 
         return {
@@ -25,7 +25,7 @@ def predict_lga_risk(population, severe, wet, rural):
     
     # 1. Format the input exactly as the model expects
     features = risk_bundle["features"]
-    input_data = [[population, severe, wet, rural]]
+    input_data = [[population, severe, wet, speed]]
     
     # 2. Make prediction
     pipeline = risk_bundle["pipeline"]

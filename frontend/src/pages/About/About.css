@@ -259,6 +259,7 @@
 /* SYSTEM FEATURES */
 
 .about-list {
+  list-style: none;
   background: #202635;
   padding: 25px 25px 25px 45px;
   border-radius: 11px;
@@ -266,10 +267,25 @@
 }
 
 .about-list li {
-  color: #aeb8c9;
-  font-size: 13px;
-  line-height: 2;
-  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  width: fit-content;
+  max-width: 620px;
+  margin: 0 auto;
+  color: #c1cada;
+  font-size: 14px;
+  line-height: 2.2;
+  text-align: left;
+}
+
+.about-list li::before {
+  content: "→";
+  color: #a5b4fc;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
 /* LIMITATIONS */
@@ -370,11 +386,12 @@
   }
 
   .about-list {
-    padding: 20px 20px 20px 40px;
+    padding: 20px 15px;
   }
 
   .about-list li {
     font-size: 12px;
+    gap: 10px; 
   }
 
   .sub-heading {
@@ -387,6 +404,56 @@
     font-size: 13px;
   }
 }
+
+/* ADDITIONAL METHODOLOGY STYLES */
+
+/* Lists inside methodology cards */
+.method-list {
+  padding-left: 22px;
+  margin: 12px 0 16px;
+}
+
+.method-list li {
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 5px;
+}
+
+/* PCA and clustering information note */
+.about-info-note {
+  margin-top: 22px;
+  padding: 20px 22px;
+  background: #202635;
+  border: 1px solid #596780;
+  border-left: 4px solid #a5b4fc;
+  border-radius: 10px;
+}
+
+.about-info-note strong {
+  display: block;
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+
+.about-info-note p {
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* Mobile responsiveness for the additional content */
+@media (max-width: 600px) {
+  .method-list {
+    padding-left: 18px;
+  }
+
+  .about-info-note {
+    padding: 16px;
+  }
+}
+
 
 
 

@@ -16,14 +16,14 @@ def predict_risk(data: RiskRequest):
         data.population,
         data.severe_pct,
         data.wet_weather_pct,
-        data.rural_road_pct
+        data.avg_speed_limit
     )
     
     return {
         "risk_level": result["risk_level"],
         "probability": result["probability"],
         "threshold_used": result["threshold"],
-        "inputs_received": data.dict()
+        "inputs_received": data.model_dump()
     }
 
 # --- CHART ENDPOINTS Risk Predictor'S PAGE ---
