@@ -13,9 +13,10 @@ const ROWS_PER_PAGE = 15;
 
 const FEATURE_LABELS = {
   Population: "Population",
-  "Severe %": "Severe crash share",
-  "Wet-weather %": "Wet-weather crash share",
-  "Rural-road %": "Rural-road crash share",
+  "Severe %": "Severe crash %",
+  "Wet-weather %": "Wet-weather crash %",
+  "Rural-road %": "Rural-road crash %",
+  "Avg speed limit": "Avg speed limit",
 };
 
 function featureLabel(feature) {
