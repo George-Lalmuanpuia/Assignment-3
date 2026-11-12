@@ -1,150 +1,332 @@
 
+/* ABOUT PAGE */
+
 .about-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background: #171b26;
 }
 
-/* Page Header */
+/* PAGE HEADER */
+
 .about-header {
-  background-color: #17365d;
-  color: white;
-  padding: 45px 35px;
-  border-radius: 12px;
+  width: 100%;
+  padding: 34px 38px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(99, 102, 241, 0.20),
+      transparent 35%
+    ),
+    linear-gradient(120deg, #171b26, #202b40);
+
+  border: 1px solid #303746;
+  border-radius: 16px;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08);
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 0;
 }
 
 .about-header h1 {
-  font-size: 32px;
-  margin-bottom: 15px;
-  color: white;
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 0 0 13px;
 }
 
 .about-header p {
-  color: #e0eaf5;
-  font-size: 16px;
-  line-height: 1.6;
+  color: #c1cada;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
-/* General Sections */
+/* GENERAL SECTIONS */
+
 .about-section {
-  margin-bottom: 35px;
+  width: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  background: #171b26;
+  border: 1px solid #303746;
+  border-radius: 14px;
 }
 
 .about-section h2 {
-  color: #17365d;
+  color: #ffffff;
   font-size: 25px;
-  margin-bottom: 15px;
+  font-weight: 750;
+  margin-bottom: 18px;
+  text-align: center;
 }
 
 .about-section > p {
-  color: #666;
-  line-height: 1.8;
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
   margin-bottom: 12px;
 }
 
-/* Project Objective Cards */
+/* OBJECTIVES AND DATASET GRID */
+
 .about-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
 }
 
+.dataset-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* OBJECTIVE AND DATASET CARDS */
+
 .about-card {
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  border: 1px solid #e1e5eb;
+  min-width: 0;
+  padding: 22px;
+  box-sizing: border-box;
+  background: #202635;
+  border: 1px solid #354052;
+  border-radius: 11px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-3px);
+  border-color: #596780;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
 }
 
 .about-card h3 {
-  color: #17365d;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 750;
   margin-bottom: 12px;
-  font-size: 18px;
 }
 
 .about-card p {
-  color: #666;
-  line-height: 1.7;
-  font-size: 15px;
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.85;
 }
 
-/* Methodology */
+/* METHODOLOGY */
+
 .method-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
 }
 
 .method-card {
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  border: 1px solid #e1e5eb;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #202635;
+  border: 1px solid #354052;
+  border-radius: 11px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.method-card:hover {
+  transform: translateY(-3px);
+  border-color: #596780;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
 }
 
 .method-card h3 {
-  color: #17365d;
-  margin-bottom: 12px;
+  color: #ffffff;
   font-size: 18px;
+  font-weight: 750;
+  margin-bottom: 15px;
 }
 
 .method-card p {
-  color: #666;
-  line-height: 1.7;
-  font-size: 15px;
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 12px;
 }
 
-/* System Features */
+/* MODEL EVALUATION */
+
+.evaluation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 22px 0;
+}
+
+.evaluation-card {
+  padding: 24px 15px;
+  text-align: center;
+  box-sizing: border-box;
+  background: #202635;
+  border: 1px solid #354052;
+  border-radius: 11px;
+  transition: transform 0.2s ease;
+}
+
+.evaluation-card:hover {
+  transform: translateY(-3px);
+}
+
+.evaluation-card h3 {
+  color: #a5b4fc;
+  font-size: 27px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.evaluation-card p {
+  color: #aeb8c9;
+  font-size: 13px;
+}
+
+.evaluation-note {
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.sub-heading {
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 750;
+  margin: 25px 0 15px;
+}
+
+/* CONFUSION MATRIX */
+
+.confusion-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;
+  margin: 18px 0;
+}
+
+.confusion-table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  background: #202635;
+  border: 1px solid #354052;
+  margin: 0 auto;
+}
+
+.confusion-table th,
+.confusion-table td {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #354052;
+  color: #c1cada;
+}
+
+.confusion-table thead th {
+  background: #303c52;
+  color: #ffffff;
+}
+
+.confusion-table tbody th {
+  background: #252f42;
+  color: #ffffff;
+}
+
+.confusion-table td {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* SYSTEM FEATURES */
+
 .about-list {
-  background-color: white;
+  background: #202635;
   padding: 25px 25px 25px 45px;
-  border-radius: 10px;
-  border: 1px solid #e1e5eb;
+  border-radius: 11px;
+  border: 1px solid #354052;
 }
 
 .about-list li {
-  color: #555;
+  color: #aeb8c9;
+  font-size: 13px;
   line-height: 2;
   padding-left: 5px;
 }
 
-/* Limitations */
+/* LIMITATIONS */
+
 .limitations-section {
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  border: 1px solid #e1e5eb;
+  background: #171b26;
 }
 
-/* Tablet Responsive */
-@media (max-width: 768px) {
-  .about-grid {
-    grid-template-columns: repeat(2, 1fr);
+.limitations-section p {
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 12px;
+}
+
+/* TABLET RESPONSIVENESS */
+
+@media (max-width: 900px) {
+
+  .about-page {
+    padding: 14px;
+    gap: 20px;
+  }
+
+  .about-grid,
+  .dataset-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .method-grid {
     grid-template-columns: 1fr;
   }
 
+  .evaluation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .about-header {
-    padding: 35px 20px;
+    padding: 28px;
   }
 
   .about-header h1 {
-    font-size: 27px;
+    font-size: 29px;
   }
 }
 
-/* Mobile Responsive */
+/* MOBILE RESPONSIVENESS */
+
 @media (max-width: 600px) {
-  .about-grid {
-    grid-template-columns: 1fr;
+
+  .about-page {
+    padding: 12px;
+    gap: 16px;
   }
 
   .about-header {
-    padding: 30px 20px;
+    padding: 24px 16px;
   }
 
   .about-header h1 {
@@ -152,15 +334,59 @@
   }
 
   .about-header p {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .about-section {
+    padding: 20px 16px;
   }
 
   .about-section h2 {
-    font-size: 22px;
+    font-size: 21px;
+  }
+
+  .about-grid,
+  .dataset-grid,
+  .method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .evaluation-card {
+    padding: 18px 10px;
+  }
+
+  .evaluation-card h3 {
+    font-size: 23px;
   }
 
   .about-card,
   .method-card {
-    padding: 20px;
+    padding: 18px;
+  }
+
+  .about-list {
+    padding: 20px 20px 20px 40px;
+  }
+
+  .about-list li {
+    font-size: 12px;
+  }
+
+  .sub-heading {
+    font-size: 21px;
+  }
+
+  .confusion-table th,
+  .confusion-table td {
+    padding: 11px 8px;
+    font-size: 13px;
   }
 }
+
+
+
