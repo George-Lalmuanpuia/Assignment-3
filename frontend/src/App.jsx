@@ -1,6 +1,6 @@
 
 import Home from "./pages/Home";
-import RiskPredictor from "./pages/RiskPredictor";
+import RiskPredictor from "./pages/RiskPredictor/RiskPredictor";
 import ClusterExplorer from "./pages/ClusterExplorer/ClusterExplorer";
 import About from "./pages/About/About";
 import { useState } from "react";

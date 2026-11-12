@@ -6,7 +6,7 @@ import "./CrashRiskModel.css";
 /* Constants and small helpers                                          */
 /* ------------------------------------------------------------------ */
 
-const DEFAULT_THRESHOLD = 0.5;
+const DEFAULT_THRESHOLD = 0.62;
 const MIN_THRESHOLD = 0.05;
 const MAX_THRESHOLD = 0.95;
 const ROWS_PER_PAGE = 15;
