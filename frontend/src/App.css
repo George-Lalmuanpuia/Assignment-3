@@ -456,14 +456,21 @@ body {
     padding: 0 5px;
   }
 
-  .predictor-card {
-    padding: 20px;
-    margin-top: 20px;
-  }
-
-  .page-description {
-    font-size: 14px;
-  }
+.predictor-card {
+  background-color: white;
+  padding: 30px;
+  margin: 30px auto 0;
+  border-radius: 10px;
+  border: 1px solid #e1e5eb;
+  max-width: 850px;
 }
 
+.predictor-card h2 {
+  color: #17365d;
+  margin-bottom: 15px;
+}
 
+.predictor-card p {
+  color: #666;
+  line-height: 1.6;
+}
