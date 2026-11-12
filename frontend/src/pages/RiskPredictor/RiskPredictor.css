@@ -1,0 +1,350 @@
+/* MAIN PAGE */
+
+.risk-predictor-page {
+  display: flex;
+  flex-direction: column; /* Places all page sections vertically. */
+  gap: 24px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box; /* Includes padding in the total element width. */
+}
+
+
+/* LOADING AND ERROR MESSAGES */
+
+.risk-status-message {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 18px 22px;
+  box-sizing: border-box;
+  color: #aeb8c9;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: center;
+  background: #171b26;
+  border: 1px solid #303746;
+  border-radius: 12px;
+}
+
+/* Error variant uses the red from the cluster palette. */
+.risk-status-message.risk-status-error {
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+
+/* PAGE HEADER TITLE */
+
+.risk-page-header {
+  width: 100%;
+  padding: 34px 38px;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevents content from overflowing out of the header */
+
+  /* Dark gradient background with a soft glow in the top right. */
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(99, 102, 241, 0.20),
+      transparent 35%
+    ),
+    linear-gradient(120deg, #171b26, #202b40);
+  border: 1px solid #303746;
+  border-radius: 16px;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08);
+}
+
+/* Centres all content inside the page header. */
+.risk-page-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* The label above the main page title. */
+.risk-page-eyebrow {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: #a5b4fc;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* Main Road Accident Risk Predictor title. */
+.risk-page-header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+/* Short description underneath the page title. */
+.risk-page-header p {
+  width: 100%;
+  max-width: 650px;
+  margin: 13px auto 0;
+  color: #c1cada;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+/* RISK MODEL INTRODUCTION */
+
+.risk-introduction {
+  width: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background: #171b26;
+  border: 1px solid #303746;
+  border-radius: 14px;
+}
+
+.risk-introduction h2 {
+  max-width: 950px;
+  margin: 0 auto 16px;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+  text-align: center;
+}
+
+/* Description paragraphs, kept to a readable line length. */
+.risk-introduction p {
+  max-width: 850px;
+  margin: 0 auto 14px;
+  color: #aeb8c9;
+  font-size: 13px;
+  line-height: 1.9;
+  text-align: center;
+}
+
+.risk-introduction p:last-of-type {
+  margin-bottom: 0;
+}
+
+
+/* INTRODUCTION SUBHEADINGS (optional, e.g. "How to read the results") */
+
+.risk-intro-subheading {
+  margin: 30px 0 18px;
+  text-align: center;
+}
+
+.risk-intro-subheading h3 {
+  margin: 0 0 11px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+
+/* RISK LEVEL CARDS (optional: explain Low / Medium / High risk) */
+
+.risk-intro-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Three equal columns */
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.risk-intro-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Lets the card shrink without overflowing its grid column. */
+  padding: 22px;
+  background: #202635;
+  border: 1px solid #354052;
+  border-radius: 11px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.risk-intro-card:hover {
+  transform: translateY(-3px);
+  border-color: #596780;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.risk-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.risk-card-title h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.risk-intro-card h5 {
+  margin: 11px;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.risk-intro-card p {
+  color: #aeb8c9;
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+
+/* RISK COLOUR INDICATORS */
+
+.risk-color-dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+/* Low risk uses BLUE (same as cluster 0). */
+.risk-card-low .risk-color-dot {
+  background: #0ea5e9;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+}
+
+/* Medium risk uses ORANGE (same as cluster 1). */
+.risk-card-medium .risk-color-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+/* High risk uses RED (same as cluster 2). */
+.risk-card-high .risk-color-dot {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+
+/* IMPORTANT NOTE SECTION */
+
+.risk-intro-note {
+  margin-top: 24px;
+  padding: 15px 18px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.18);
+  border-left: 3px solid #818cf8;
+  border-radius: 7px;
+  color: #b9c3d4;
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+
+/* CHART AND FORM SECTIONS: fixed spacing and borders for each block.
+   Add className="risk-chart-section" to the wrapper inside CrashRiskModel. */
+
+.risk-chart-section,
+.risk-form-section {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--bg, #171b26);
+  border: 1px solid var(--border, #303746);
+  border-radius: 12px;
+}
+
+
+/* TABLET RESPONSIVENESS */
+
+@media (max-width: 768px) {
+
+  /* Stacks the risk cards vertically. */
+  .risk-intro-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .risk-explorer-page {
+    padding: 14px;
+    gap: 20px;
+  }
+
+  .risk-page-header {
+    padding: 24px;
+  }
+
+  .risk-page-header h1 {
+    font-size: 29px;
+  }
+
+  .risk-introduction {
+    padding: 24px;
+  }
+
+  .risk-chart-section,
+  .risk-form-section {
+    padding: 14px;
+  }
+}
+
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+
+  .risk-explorer-page {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .risk-page-header {
+    padding: 20px 16px;
+  }
+
+  .risk-page-header h1 {
+    font-size: 25px;
+  }
+
+  .risk-page-header p {
+    font-size: 12px;
+  }
+
+  .risk-introduction {
+    padding: 20px 16px;
+  }
+
+  .risk-introduction h2 {
+    font-size: 21px;
+  }
+
+  .risk-intro-subheading h3 {
+    font-size: 16px;
+  }
+
+  .risk-introduction p {
+    font-size: 12px;
+  }
+
+  .risk-intro-card {
+    padding: 18px;
+  }
+
+  .risk-intro-note {
+    padding: 13px;
+    font-size: 11px;
+  }
+
+  .risk-chart-section,
+  .risk-form-section {
+    padding: 10px;
+  }
+}

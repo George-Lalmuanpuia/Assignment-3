@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CrashRiskModel from "../../charts/classification/CrashRiskModel";
+import RiskPredictorForm from "../../charts/classification/RiskPredictorForm";
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
@@ -22,6 +23,7 @@ function RiskPredictor() {
           fetch(`${API_URL}/api/classification/metrics`),
           fetch(`${API_URL}/api/classification/importance`),
           fetch(`${API_URL}/api/classification/coefficients`),
+         //fetch(`${API_URL}/api/classification/predict`),
         ]);
 
         if (responses.some((response) => !response.ok)) {
@@ -52,10 +54,9 @@ function RiskPredictor() {
   if (error) return <p>{error}</p>;
 
   return (
-    <main className="risk-explorer-page">
+    <main className="risk-predictor-page">
+      <header className="riskpageheader">
       <h1>Road Accident Risk Predictor</h1>
-
-      <section className="risk-introduction">
         <h2>Which LGAs are likely to have a high crash risk?</h2>
 
         <p>
@@ -65,7 +66,7 @@ function RiskPredictor() {
           whether the LGA will have a high crash rate in 2024, which means{" "}
           {RISK_THRESHOLD} or more crashes per 100,000 residents.
         </p>
-
+        
         <p>
           Start with the accuracy summary, then check the ROC curve and
           confusion matrix to see how often the model is right. Move the risk
@@ -73,7 +74,9 @@ function RiskPredictor() {
           results, and use the table at the bottom to find the LGAs the model
           expects to be high risk.
         </p>
-      </section>
+      
+      </header>
+      
 
       <CrashRiskModel
         predictions={predictions}
@@ -82,7 +85,17 @@ function RiskPredictor() {
         coefficients={coefficients}
         riskThreshold={RISK_THRESHOLD}
       />
+
+
+      <section className="risk-form-section">
+        <RiskPredictorForm />
+      </section>
+            
+
+      
     </main>
+
+    
   );
 }
 
