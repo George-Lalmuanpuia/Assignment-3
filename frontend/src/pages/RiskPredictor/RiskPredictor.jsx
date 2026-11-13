@@ -6,7 +6,7 @@ import "./RiskPredictor.css";
 const API_URL = `http://${window.location.hostname}:8000`;
 
 // Same value used in the notebook when the High_risk label was created.
-const RISK_THRESHOLD = 250;
+const RISK_THRESHOLD = 254.9;
 
 function RiskPredictor() {
   const [predictions, setPredictions] = useState([]);
@@ -76,22 +76,18 @@ function RiskPredictor() {
 
           <h1>Road Accident Risk Predictor</h1>
 
-          <p>Which LGAs are likely to have a high crash risk?</p>
+          <p>Which areas are most at risk of road accidents?</p>
 
           <p>
-            This model looks at each New South Wales Local Government Area
-            (LGA) using its population, severe crash share, wet-weather crash
-            share and rural-road crash share from 2020 to 2023. It then predicts
-            whether the LGA will have a high crash rate in 2024, which means{" "}
-            {RISK_THRESHOLD} or more crashes per 100,000 residents.
+            Not all Local Government Areas (LGAs) face the same level of road accident risk.
+             By examining historical crash patterns and local characteristics, we can identify
+              areas that may be more likely to experience high crash rates.
           </p>
 
           <p>
-            Start with the accuracy summary, then check the ROC curve and
-            confusion matrix to see how often the model is right. Move the risk
-            cut-off slider to see how flagging more or fewer LGAs changes the
-            results, and use the table at the bottom to find the LGAs the model
-            expects to be high risk.
+            Explore how population, severe crashes, wet-weather conditions and rural roads contribute
+             to predicting crash risk in 2024. Use the model evaluation charts and adjustable risk 
+             cut-off to investigate its predictions.
           </p>
 
         </div>
