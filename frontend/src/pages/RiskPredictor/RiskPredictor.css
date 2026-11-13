@@ -42,9 +42,8 @@
   width: 100%;
   padding: 34px 38px;
   box-sizing: border-box;
-  overflow: hidden; /* Prevents content from overflowing out of the header */
+  overflow: hidden;
 
-  /* Dark gradient background with a soft glow in the top right. */
   background:
     radial-gradient(
       circle at 90% 15%,
@@ -52,6 +51,7 @@
       transparent 35%
     ),
     linear-gradient(120deg, #171b26, #202b40);
+
   border: 1px solid #303746;
   border-radius: 16px;
   box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08);
@@ -88,7 +88,7 @@
 /* Short description underneath the page title. */
 .risk-page-header p {
   width: 100%;
-  max-width: 650px;
+  max-width: 850px;
   margin: 13px auto 0;
   color: #c1cada;
   font-size: 14px;

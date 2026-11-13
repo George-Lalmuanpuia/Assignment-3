@@ -1,20 +1,22 @@
 /* All selectors are prefixed with .crm so they cannot clash with other pages. */
 
 .crm {
-  --crm-ink: #0f172a;
-  --crm-muted: #64748b;
-  --crm-line: #e2e8f0;
-  --crm-surface: #ffffff;
-  --crm-soft: #f8fafc;
-  --crm-accent: #1d4ed8;
+  --crm-ink: #ffffff;
+  --crm-muted: #bfc9d9;
+  --crm-line: #303746;
+  --crm-surface: #171b26;
+  --crm-soft: #222938;
+  --crm-accent: #7299e8;
   --crm-high: #c2410c;
   --crm-low: #0f766e;
   --crm-good: #16a34a;
   --crm-bad: #dc2626;
 
-  max-width: 1040px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
   padding: 28px 28px 36px;
+  box-sizing: border-box;
   background: var(--crm-surface);
   border: 1px solid var(--crm-line);
   border-radius: 14px;
@@ -292,9 +294,9 @@
 }
 
 .crm-chart-box {
+  background: #ffffff;
   position: relative;
   padding: 8px;
-  background: var(--crm-surface);
   border: 1px solid var(--crm-line);
   border-radius: 12px;
 }
@@ -414,6 +416,11 @@
 .crm-matrix-cell {
   transition: fill 0.2s ease;
 }
+
+.crm .crm-chart-box {
+  color: #000000;
+}
+
 
 /* ---------- feature chart ---------- */
 
@@ -672,3 +679,5 @@
     transition: none;
   }
 }
+
+

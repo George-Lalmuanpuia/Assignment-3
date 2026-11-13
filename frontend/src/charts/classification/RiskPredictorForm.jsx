@@ -1,8 +1,31 @@
-
 import React, { useState } from "react";
 import "./RiskPredictorForm.css";
 
 const API_URL = `http://${window.location.hostname}:8000`;
+
+// Must match the path shown next to "POST" in http://localhost:8000/docs
+const PREDICT_PATH = "/api/classification/predict";
+
+// FastAPI returns `detail` as a string for HTTPException errors and as a
+// list of objects for validation errors (422). Turn either into readable text.
+function getErrorMessage(data) {
+    const detail = data && data.detail;
+
+    if (typeof detail === "string") return detail;
+
+    if (Array.isArray(detail)) {
+        return detail
+            .map(item => {
+                const field = Array.isArray(item.loc)
+                    ? item.loc[item.loc.length - 1]
+                    : "";
+                return field ? `${field}: ${item.msg}` : item.msg;
+            })
+            .join("; ");
+    }
+
+    return "Prediction failed.";
+}
 
 function RiskPredictorForm() {
     const [formData, setFormData] = useState({
@@ -14,6 +37,8 @@ function RiskPredictorForm() {
         probability_cutoff: 0.5
     });
 
+    // The API returns the probability only. The cut-off slider is applied
+    // here in the browser, so the classification updates as the slider moves.
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -35,31 +60,39 @@ function RiskPredictorForm() {
         setError("");
 
         try {
-            const response = await fetch(
-                `${API_URL}/api/classification/predict`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        lga_name: formData.lga_name || "Hypothetical LGA",
-                        population: Number(formData.population),
-                        severe_percent: Number(formData.severe_percent),
-                        wet_weather_percent: Number(formData.wet_weather_percent),
-                        avg_speed_limit: Number(formData.avg_speed_limit),
-                        probability_cutoff: Number(formData.probability_cutoff)
-                    })
-                }
-            );
+            const response = await fetch(`${API_URL}${PREDICT_PATH}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    population: Number(formData.population),
+                    severe_pct: Number(formData.severe_percent),
+                    wet_weather_pct: Number(formData.wet_weather_percent),
+                    avg_speed_limit: Number(formData.avg_speed_limit)
+                })
+            });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => ({}));
 
             if (!response.ok) {
-                throw new Error(data.detail || "Prediction failed.");
+                throw new Error(getErrorMessage(data));
             }
 
-            setResult(data);
+            // Assumes `probability` is between 0 and 1 (e.g. predict_proba).
+            const probability = Number(data.probability);
+
+            if (!Number.isFinite(probability)) {
+                throw new Error("The server did not return a valid probability.");
+            }
+
+            const modelThreshold = Number(data.threshold_used);
+
+            setResult({
+                lga_name: formData.lga_name || "Hypothetical LGA",
+                probability: Math.min(1, Math.max(0, probability)),
+                model_threshold: Number.isFinite(modelThreshold) ? modelThreshold : null
+            });
 
         } catch (err) {
             setError(err.message || "Unable to connect to the prediction server.");
@@ -67,6 +100,13 @@ function RiskPredictorForm() {
             setLoading(false);
         }
     }
+
+    const cutoff = Number(formData.probability_cutoff);
+    const isHighRisk = result ? result.probability >= cutoff : false;
+    const prediction = isHighRisk ? "High risk" : "Low risk";
+    const probabilityPercentage = result
+        ? (result.probability * 100).toFixed(1)
+        : null;
 
     return (
         <div className="risk-predictor-container">
@@ -85,8 +125,9 @@ function RiskPredictorForm() {
                     <h3>LGA Information</h3>
 
                     <div className="predictor-field">
-                        <label>LGA Name</label>
+                        <label htmlFor="lga_name">LGA Name</label>
                         <input
+                            id="lga_name"
                             type="text"
                             name="lga_name"
                             placeholder="Enter an LGA name"
@@ -96,8 +137,9 @@ function RiskPredictorForm() {
                     </div>
 
                     <div className="predictor-field">
-                        <label>Population</label>
+                        <label htmlFor="population">Population</label>
                         <input
+                            id="population"
                             type="number"
                             name="population"
                             min="0"
@@ -109,8 +151,9 @@ function RiskPredictorForm() {
                     </div>
 
                     <div className="predictor-field">
-                        <label>Severe Crash Percentage (%)</label>
+                        <label htmlFor="severe_percent">Severe Crash Percentage (%)</label>
                         <input
+                            id="severe_percent"
                             type="number"
                             name="severe_percent"
                             min="0"
@@ -124,8 +167,9 @@ function RiskPredictorForm() {
                     </div>
 
                     <div className="predictor-field">
-                        <label>Wet-weather Crash Percentage (%)</label>
+                        <label htmlFor="wet_weather_percent">Wet-weather Crash Percentage (%)</label>
                         <input
+                            id="wet_weather_percent"
                             type="number"
                             name="wet_weather_percent"
                             min="0"
@@ -139,8 +183,9 @@ function RiskPredictorForm() {
                     </div>
 
                     <div className="predictor-field">
-                        <label>Average Speed Limit (km/h)</label>
+                        <label htmlFor="avg_speed_limit">Average Speed Limit (km/h)</label>
                         <input
+                            id="avg_speed_limit"
                             type="number"
                             name="avg_speed_limit"
                             min="1"
@@ -157,12 +202,13 @@ function RiskPredictorForm() {
                     <h3>Classification Settings</h3>
 
                     <div className="predictor-field">
-                        <label>
+                        <label htmlFor="probability_cutoff">
                             Risk Probability Cut-off:{" "}
-                            {(Number(formData.probability_cutoff) * 100).toFixed(0)}%
+                            {(cutoff * 100).toFixed(0)}%
                         </label>
 
                         <input
+                            id="probability_cutoff"
                             type="range"
                             name="probability_cutoff"
                             min="0.05"
@@ -175,7 +221,8 @@ function RiskPredictorForm() {
                         <p className="predictor-hint">
                             The model classifies an area as high risk when
                             its predicted probability reaches or exceeds
-                            this cut-off.
+                            this cut-off. After predicting, you can move
+                            the slider to see the classification change.
                         </p>
                     </div>
                 </div>
@@ -191,13 +238,13 @@ function RiskPredictorForm() {
             </form>
 
             {error && (
-                <div className="predictor-error">
+                <div className="predictor-error" role="alert">
                     {error}
                 </div>
             )}
 
             {result && (
-                <div className="prediction-result">
+                <div className="prediction-result" aria-live="polite">
 
                     <h3>Prediction Result</h3>
 
@@ -206,13 +253,13 @@ function RiskPredictorForm() {
                     </p>
 
                     <div className={`result-status ${
-                        result.is_high_risk ? "high-risk" : "low-risk"
+                        isHighRisk ? "high-risk" : "low-risk"
                     }`}>
-                        {result.prediction}
+                        {prediction}
                     </div>
 
                     <div className="result-probability">
-                        {result.probability_percentage}%
+                        {probabilityPercentage}%
                     </div>
 
                     <p className="result-description">
@@ -223,30 +270,36 @@ function RiskPredictorForm() {
                         <div>
                             <span>Probability cut-off</span>
                             <strong>
-                                {(result.probability_cutoff * 100).toFixed(0)}%
+                                {(cutoff * 100).toFixed(0)}%
                             </strong>
                         </div>
 
                         <div>
                             <span>Predicted probability</span>
                             <strong>
-                                {result.probability_percentage}%
+                                {probabilityPercentage}%
                             </strong>
                         </div>
 
                         <div>
                             <span>Model classification</span>
-                            <strong>{result.prediction}</strong>
+                            <strong>{prediction}</strong>
                         </div>
                     </div>
 
                     <p className="result-explanation">
                         The predicted probability is{" "}
-                        {result.is_high_risk ? "equal to or above" : "below"}{" "}
+                        {isHighRisk ? "equal to or above" : "below"}{" "}
                         the selected probability cut-off of{" "}
-                        {(result.probability_cutoff * 100).toFixed(0)}%.
+                        {(cutoff * 100).toFixed(0)}%.
                         Therefore, the model classifies this hypothetical
-                        LGA as {result.prediction.toLowerCase()}.
+                        LGA as {prediction.toLowerCase()}.
+                        {result.model_threshold !== null && (
+                            <>
+                                {" "}The model's built-in cut-off is{" "}
+                                {(result.model_threshold * 100).toFixed(0)}%.
+                            </>
+                        )}
                     </p>
 
                 </div>

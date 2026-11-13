@@ -9,7 +9,7 @@ router = APIRouter()
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 
-@router.post("/predict", response_model=RiskResponse, tags=["AI Models"])
+@router.post("/api/classification/predict", response_model=RiskResponse, tags=["AI Models"])
 def predict_risk(data: RiskRequest):
     # Call the service function
     result = predict_lga_risk(
