@@ -409,15 +409,43 @@
 
 /* Lists inside methodology cards */
 .method-list {
-  padding-left: 22px;
+  list-style: none;
+  padding: 15px 25px;
   margin: 12px 0 16px;
 }
 
 .method-list li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 5px;
   color: #aeb8c9;
   font-size: 13px;
-  line-height: 1.9;
-  margin-bottom: 5px;
+  line-height: 2.2;
+  text-align: left;
+}
+
+.method-list li::before {
+  content: "→";
+  color: #a5b4fc;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .method-list {
+    padding: 15px 5px;
+  }
+
+  .method-list li {
+    font-size: 12px;
+    gap: 10px;
+  }
 }
 
 /* PCA and clustering information note */
