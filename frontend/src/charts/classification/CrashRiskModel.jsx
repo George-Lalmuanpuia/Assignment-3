@@ -617,7 +617,7 @@ function CrashRiskModel({
 }) {
   const [cutoff, setCutoff] = useState(DEFAULT_THRESHOLD);
   const [featureMode, setFeatureMode] = useState("importance");
-  const [view, setView] = useState("high");
+  const [view, setView] = useState("all");
   const [query, setQuery] = useState("");
   const [onlyWrong, setOnlyWrong] = useState(false);
   const [visibleRows, setVisibleRows] = useState(ROWS_PER_PAGE);
@@ -751,7 +751,7 @@ function CrashRiskModel({
 
   function resetControls() {
     setCutoff(DEFAULT_THRESHOLD);
-    setView("high");
+    setView("all");
     setQuery("");
     setOnlyWrong(false);
     setVisibleRows(ROWS_PER_PAGE);
@@ -779,11 +779,12 @@ function CrashRiskModel({
           Logistic Regression |  2024 test data
         </p>
         <p className="crm-definition">
-          An LGA counts as high risk when it has a higher than median crash rate/{riskThreshold} or more crashes
-          per 100,000 residents. The model sees each LGA's earlier years and
+          An LGA counts as high risk when it has a higher than median crash rate ( {riskThreshold} or more crashes
+          per 100,000 residents). The model sees each LGA's earlier years and
           predicts whether it will be high risk in the test year.
         </p>
       </header>
+      <br />
 
       {/* CONTROLS */}
       <div className="crm-controls">
@@ -791,6 +792,7 @@ function CrashRiskModel({
           <label htmlFor="crm-cutoff">
             Risk cut-off: <strong>{cutoff.toFixed(2)}</strong>
           </label>
+
           <input
             id="crm-cutoff"
             type="range"
@@ -801,19 +803,23 @@ function CrashRiskModel({
             onChange={(event) => setCutoff(Number(event.target.value))}
             aria-describedby="crm-cutoff-help"
           />
+
           <div className="crm-slider-ends" aria-hidden="true">
             <span>Flag more LGAs</span>
             <span>Flag fewer LGAs</span>
           </div>
+
           <p id="crm-cutoff-help" className="crm-help">
             An LGA is predicted high risk when its risk probability reaches
             this cut-off. Every chart and the table below update as you move it.
           </p>
         </div>
 
-        <button type="button" className="crm-reset" onClick={resetControls}>
-          Reset
-        </button>
+        <div className="crm-reset-wrapper">
+          <button type="button" className="crm-reset" onClick={resetControls}>
+            Reset
+          </button>
+        </div>
       </div>
       <br />
       
@@ -886,7 +892,7 @@ function CrashRiskModel({
       {/* ROC + CONFUSION MATRIX CHARTs*/}
       <div className="crm-charts-card">
       <section className="crm-section" aria-labelledby="crm-perf-title">
-        <h3 id="crm-perf-title">Model classification performance</h3>
+        <h2 id="crm-perf-title">Model Classification performance</h2>
 
         <div className="crm-grid-two">
           <div>
@@ -953,6 +959,7 @@ function CrashRiskModel({
               </div>
             )}
           </div>
+          <br />
 
           <FeatureChart items={featureItems} mode={featureMode} />
 
@@ -971,6 +978,7 @@ function CrashRiskModel({
           {confusion.tp} of them really were, and the model missed{" "}
           {confusion.fn}.
         </p>
+        <br />
 
         <div className="crm-filters">
           <div className="crm-filter">
@@ -997,9 +1005,9 @@ function CrashRiskModel({
                 setVisibleRows(ROWS_PER_PAGE);
               }}
             >
+              <option value="all">All LGAs</option>
               <option value="high">Predicted high risk</option>
               <option value="low">Predicted low risk</option>
-              <option value="all">All LGAs</option>
             </select>
           </div>
 
