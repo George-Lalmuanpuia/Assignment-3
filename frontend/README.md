@@ -6,26 +6,10 @@ This directory contains the React single-page application. It handles the UI, ro
 - src/assets/: Contains images and other static assets used in the frontend.
 
 - src/charts/: Contains the D3.js charts and data visualisation components.
-   charts/classfication,
-         /cluster
-            ClusterProfile.jsx
-            ClusterProfile.css
-            ScatterPlot.jsx
-            ScatterPlot.css
 
 - src/components/: Contains reusable UI components such as Navbar.jsx.
 
-- src/pages/: Contains the main application pages 
-(Home.jsx,
- About/,
-  ClusterExplorer/
-                  ClusterExplorer.css
-                  ClusterExplorer.jsx
-  , RiskPredictor/).
-
-- src/services/: Contains functions for communicating with the FastAPI backend.
-
-- src/styles/: Contains CSS files for styling the application.
+- src/pages/: Contains the main application pages (Home,Risk Predictor, Cluster Explorer, About)
 
 - src/App.jsx: Main React component that manages the application structure and routing.
 
@@ -35,7 +19,7 @@ This directory contains the React single-page application. It handles the UI, ro
 
 - src/main.jsx: Entry point of the React application.
 
-
+- index.html: The main entry point.
 
 ## Setup
 
@@ -85,7 +69,6 @@ cluster_profiles.csv - Contains the average road-safety feature values for each 
 
 The frontend retrieves the processed clustering data through the FastAPI backend.
 
-
 /api/clusters/pca - Retrieves PCA coordinates and clustering information for the Scatter Plot.
 
 /api/clusters/profiles - Retrieves average feature values for the Cluster Profile Bar Chart.
@@ -98,12 +81,3 @@ React – Frontend components and interactive page functionality.
 
 D3.js – Data-driven chart rendering, positioning, styling and transitions.
 
-## File created
-ScatterPlot.jsx
-ScatterPlot.css
-
-ClusterProfile.jsx
-ClusterProfile.css
-
-ClusterExplorer.jsx
-ClusterExplorer.css
