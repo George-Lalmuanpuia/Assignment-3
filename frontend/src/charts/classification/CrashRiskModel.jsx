@@ -617,7 +617,7 @@ function CrashRiskModel({
 }) {
   const [cutoff, setCutoff] = useState(DEFAULT_THRESHOLD);
   const [featureMode, setFeatureMode] = useState("importance");
-  const [view, setView] = useState("high");
+  const [view, setView] = useState("all");
   const [query, setQuery] = useState("");
   const [onlyWrong, setOnlyWrong] = useState(false);
   const [visibleRows, setVisibleRows] = useState(ROWS_PER_PAGE);
@@ -711,7 +711,7 @@ function CrashRiskModel({
     const rest = importanceItems.slice(1);
     const clearlyAhead = rest.every((item) => top.value - top.spread > item.value + item.spread);
     const direction = coefficientItems.find((item) => item.feature === top.feature);
-
+    <br/>
     let text = clearlyAhead
       ? `${featureLabel(top.feature)} is the factor the model relies on most, and it is well ahead of the others.`
       : `${featureLabel(top.feature)} ranks first, but the gap to the other factors is within the margin of error.`;
@@ -751,7 +751,7 @@ function CrashRiskModel({
 
   function resetControls() {
     setCutoff(DEFAULT_THRESHOLD);
-    setView("high");
+    setView("all");
     setQuery("");
     setOnlyWrong(false);
     setVisibleRows(ROWS_PER_PAGE);
@@ -776,14 +776,15 @@ function CrashRiskModel({
       <header className="crm-header">
         <h2>Crash Risk Prediction Model</h2>
         <p className="crm-subtitle">
-          Logistic Regression | {testYear ? `${testYear} ` : ""}test data
+          Logistic Regression |  2024 test data
         </p>
         <p className="crm-definition">
-          An LGA counts as high risk when it has {riskThreshold} or more crashes
-          per 100,000 residents. The model sees each LGA's earlier years and
+          An LGA counts as high risk when it has a higher than median crash rate ( {riskThreshold} or more crashes
+          per 100,000 residents). The model sees each LGA's earlier years and
           predicts whether it will be high risk in the test year.
         </p>
       </header>
+      <br />
 
       {/* CONTROLS */}
       <div className="crm-controls">
@@ -791,6 +792,7 @@ function CrashRiskModel({
           <label htmlFor="crm-cutoff">
             Risk cut-off: <strong>{cutoff.toFixed(2)}</strong>
           </label>
+
           <input
             id="crm-cutoff"
             type="range"
@@ -801,88 +803,100 @@ function CrashRiskModel({
             onChange={(event) => setCutoff(Number(event.target.value))}
             aria-describedby="crm-cutoff-help"
           />
+
           <div className="crm-slider-ends" aria-hidden="true">
             <span>Flag more LGAs</span>
             <span>Flag fewer LGAs</span>
           </div>
+
           <p id="crm-cutoff-help" className="crm-help">
             An LGA is predicted high risk when its risk probability reaches
             this cut-off. Every chart and the table below update as you move it.
           </p>
         </div>
 
-        <button type="button" className="crm-reset" onClick={resetControls}>
-          Reset
-        </button>
+        <div className="crm-reset-wrapper">
+          <button type="button" className="crm-reset" onClick={resetControls}>
+            Reset
+          </button>
+        </div>
+      </div>
+      <br />
+      
+      {/* ACCURACY */}
+      <div className="crm-accuracy-card">
+        <section className="crm-section" aria-labelledby="crm-accuracy-title">
+          <div className="crm-accuracy-top">
+            <div>
+              <h3 id="crm-accuracy-title">Overall model accuracy</h3>
+              <p className="crm-accuracy-value">{percent(scores.accuracy)}</p>
+            </div>
+            <span className="crm-pill">At cut-off {cutoff.toFixed(2)}</span>
+          </div>
+
+          <div
+            className="crm-accuracy-bar"
+            role="img"
+            aria-label={`${scores.correct} correct and ${scores.incorrect} incorrect predictions`}
+          >
+            <div className="crm-bar-correct" style={{ width: `${correctShare}%` }} />
+            <div className="crm-bar-incorrect" style={{ width: `${100 - correctShare}%` }} />
+          </div>
+
+          <div className="crm-accuracy-legend">
+            <span>Correct predictions: {scores.correct}</span>
+            <span>Incorrect: {scores.incorrect}</span>
+          </div>
+
+          {baseline !== null && (
+            <p className="crm-baseline">
+              Always guessing the most common outcome would be right{" "}
+              {percent(baseline)} of the time.
+            </p>
+          )}
+
+          <dl className="crm-stats">
+            <div>
+              <dt>Precision</dt>
+              <dd>{percent(scores.precision)}</dd>
+              <span>Flagged LGAs that really were high risk</span>
+            </div>
+
+            <div>
+              <dt>Recall</dt>
+              <dd>{percent(scores.recall)}</dd>
+              <span>High-risk LGAs the model caught</span>
+            </div>
+
+            <div>
+              <dt>F1 score</dt>
+              <dd>{percent(scores.f1)}</dd>
+              <span>Balance of precision and recall</span>
+            </div>
+
+            <div>
+              <dt>ROC AUC</dt>
+              <dd>{roc.auc !== null ? roc.auc.toFixed(2) : "N/A"}</dd>
+              <span>
+                {cvMean !== null
+                  ? `Cross-validation: ${cvMean.toFixed(2)}${
+                      cvStd !== null ? ` ± ${cvStd.toFixed(2)}` : ""
+                    }`
+                  : "1.0 is perfect, 0.5 is guessing"}
+              </span>
+            </div>
+          </dl>
+        </section>
       </div>
 
-      {/* ACCURACY */}
-      <section className="crm-section" aria-labelledby="crm-accuracy-title">
-        <div className="crm-accuracy-top">
-          <div>
-            <h3 id="crm-accuracy-title">Overall model accuracy</h3>
-            <p className="crm-accuracy-value">{percent(scores.accuracy)}</p>
-          </div>
-          <span className="crm-pill">At cut-off {cutoff.toFixed(2)}</span>
-        </div>
-
-        <div
-          className="crm-accuracy-bar"
-          role="img"
-          aria-label={`${scores.correct} correct and ${scores.incorrect} incorrect predictions`}
-        >
-          <div className="crm-bar-correct" style={{ width: `${correctShare}%` }} />
-          <div className="crm-bar-incorrect" style={{ width: `${100 - correctShare}%` }} />
-        </div>
-        <div className="crm-accuracy-legend">
-          <span>Correct predictions: {scores.correct}</span>
-          <span>Incorrect: {scores.incorrect}</span>
-        </div>
-
-        {baseline !== null && (
-          <p className="crm-baseline">
-            Always guessing the most common outcome would be right{" "}
-            {percent(baseline)} of the time.
-          </p>
-        )}
-
-        <dl className="crm-stats">
-          <div>
-            <dt>Precision</dt>
-            <dd>{percent(scores.precision)}</dd>
-            <span>Flagged LGAs that really were high risk</span>
-          </div>
-          <div>
-            <dt>Recall</dt>
-            <dd>{percent(scores.recall)}</dd>
-            <span>High-risk LGAs the model caught</span>
-          </div>
-          <div>
-            <dt>F1 score</dt>
-            <dd>{percent(scores.f1)}</dd>
-            <span>Balance of precision and recall</span>
-          </div>
-          <div>
-            <dt>ROC AUC</dt>
-            <dd>{roc.auc !== null ? roc.auc.toFixed(2) : "N/A"}</dd>
-            <span>
-              {cvMean !== null
-                ? `Cross-validation: ${cvMean.toFixed(2)}${
-                    cvStd !== null ? ` ± ${cvStd.toFixed(2)}` : ""
-                  }`
-                : "1.0 is perfect, 0.5 is guessing"}
-            </span>
-          </div>
-        </dl>
-      </section>
-
-      {/* ROC + CONFUSION MATRIX */}
+      {/* ROC + CONFUSION MATRIX CHARTs*/}
+      <div className="crm-charts-card">
       <section className="crm-section" aria-labelledby="crm-perf-title">
-        <h3 id="crm-perf-title">Model classification performance</h3>
+        <h2 id="crm-perf-title">Model Classification performance</h2>
 
         <div className="crm-grid-two">
           <div>
-            <h4>ROC curve</h4>
+            <h3>ROC curve</h3>
             <RocChart
               roc={roc.points}
               auc={roc.auc}
@@ -899,7 +913,7 @@ function CrashRiskModel({
           </div>
 
           <div>
-            <h4>Confusion matrix</h4>
+            <h3>Confusion matrix</h3>
             <ConfusionMatrix confusion={confusion} />
             <p className="crm-caption">
               Correct and incorrect predictions at the current cut-off. The
@@ -908,8 +922,10 @@ function CrashRiskModel({
           </div>
         </div>
       </section>
+      </div>
 
       {/* FEATURE IMPORTANCE */}
+      <div className="crm-feature-card">
       {featureItems.length > 0 && (
         <section className="crm-section" aria-labelledby="crm-feature-title">
           <div className="crm-feature-head">
@@ -943,14 +959,17 @@ function CrashRiskModel({
               </div>
             )}
           </div>
+          <br />
 
           <FeatureChart items={featureItems} mode={featureMode} />
 
           {featureInsight && <p className="crm-insight">{featureInsight}</p>}
         </section>
       )}
+      </div>
 
       {/* LGA TABLE */}
+      <div className="crm-table-card">
       <section className="crm-section" aria-labelledby="crm-table-title">
         <h3 id="crm-table-title">Which LGAs are likely to be high risk?</h3>
         <p className="crm-caption crm-caption-tight">
@@ -959,6 +978,7 @@ function CrashRiskModel({
           {confusion.tp} of them really were, and the model missed{" "}
           {confusion.fn}.
         </p>
+        <br />
 
         <div className="crm-filters">
           <div className="crm-filter">
@@ -985,9 +1005,9 @@ function CrashRiskModel({
                 setVisibleRows(ROWS_PER_PAGE);
               }}
             >
+              <option value="all">All LGAs</option>
               <option value="high">Predicted high risk</option>
               <option value="low">Predicted low risk</option>
-              <option value="all">All LGAs</option>
             </select>
           </div>
 
@@ -1073,6 +1093,7 @@ function CrashRiskModel({
           </button>
         )}
       </section>
+      </div>
     </section>
   );
 }

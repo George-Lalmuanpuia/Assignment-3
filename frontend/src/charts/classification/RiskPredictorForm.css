@@ -1,10 +1,10 @@
-
 .risk-predictor-container {
-    background: #fff;
+    background: #171b26; /* Dark surface */
     padding: 28px;
     border-radius: 12px;
     margin-top: 30px;
-    color: #333;
+    color: #bfc9d9; /* Light grey text */
+    border: 1px solid #303746; /* Subtle dark border to match the rest of the UI */
 }
 
 .predictor-heading {
@@ -12,23 +12,23 @@
 }
 
 .predictor-heading h2 {
-    color: #483500;
+    color: #ffffff; /* White heading */
     margin-bottom: 8px;
 }
 
 .predictor-heading p {
-    color: #666;
+    color: #bfc9d9; /* Light grey text */
     line-height: 1.5;
 }
 
 .predictor-section {
-    border-top: 1px solid #eee;
+    border-top: 1px solid #303746; /* Darker border */
     padding-top: 20px;
     margin-top: 20px;
 }
 
 .predictor-section h3 {
-    color: #483500;
+    color: #ffffff; /* White heading */
     margin-bottom: 18px;
 }
 
@@ -41,34 +41,37 @@
 .predictor-field label {
     font-weight: 600;
     margin-bottom: 8px;
+    color: #bfc9d9;
 }
 
 .predictor-field input:not([type="range"]) {
     padding: 11px;
-    border: 1px solid #ccc;
+    background: #222938; /* Dark input background */
+    color: #ffffff; /* White input text */
+    border: 1px solid #303746;
     border-radius: 6px;
     font-size: 14px;
 }
 
 .predictor-field input:focus {
     outline: none;
-    border-color: #d49100;
+    border-color: #7299e8; /* Light blue border on focus */
 }
 
 .predictor-field input[type="range"] {
-    accent-color: #d49100;
+    accent-color: #7299e8; /* Light blue slider */
     cursor: pointer;
 }
 
 .predictor-hint {
     font-size: 13px;
-    color: #777;
+    color: #bfc9d9; /* Light grey text */
     margin-top: 8px;
 }
 
 .predictor-button {
-    background: #d49100;
-    color: white;
+    background: #7299e8; /* Light blue button */
+    color: #171b26; /* Dark text on button for contrast */
     border: none;
     border-radius: 6px;
     padding: 13px 22px;
@@ -79,7 +82,7 @@
 }
 
 .predictor-button:hover {
-    background: #b77c00;
+    background: #85a8ee; /* Slightly lighter blue on hover */
 }
 
 .predictor-button:disabled {
@@ -90,18 +93,18 @@
 .prediction-result {
     margin-top: 30px;
     padding: 25px;
-    border: 1px solid #eee;
+    border: 1px solid #303746;
     border-radius: 10px;
-    background: #fafafa;
+    background: #222938; /* Slightly lighter dark box for the result */
 }
 
 .prediction-result h3 {
-    color: #483500;
+    color: #ffffff; /* White heading */
     margin-top: 0;
 }
 
 .result-lga {
-    color: #777;
+    color: #bfc9d9;
     margin-bottom: 12px;
 }
 
@@ -112,26 +115,26 @@
 }
 
 .high-risk {
-    color: #c0392b;
+    color: #ef4444; /* Red adjusted for dark mode */
 }
 
 .low-risk {
-    color: #26834a;
+    color: #10b981; /* Green adjusted for dark mode */
 }
 
 .result-probability {
     font-size: 42px;
     font-weight: 700;
-    color: #483500;
+    color: #ffffff; /* White text */
 }
 
 .result-description {
-    color: #777;
+    color: #bfc9d9;
     font-size: 14px;
 }
 
 .result-details {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #303746;
     margin-top: 20px;
     padding-top: 15px;
 }
@@ -144,21 +147,22 @@
 }
 
 .result-details span {
-    color: #666;
+    color: #bfc9d9;
 }
 
 .result-explanation {
-    background: #fff4d8;
+    background: #303746; /* Darker highlight box */
     padding: 14px;
     border-radius: 6px;
     line-height: 1.6;
     margin-top: 20px;
+    color: #ffffff;
 }
 
 .predictor-error {
-    color: #b42318;
-    background: #fff0ef;
-    border: 1px solid #f5c2be;
+    color: #fca5a5; /* Light red text */
+    background: rgba(220, 38, 38, 0.1); /* Subtle red background */
+    border: 1px solid rgba(220, 38, 38, 0.3);
     padding: 12px;
     border-radius: 6px;
     margin-top: 20px;
@@ -166,7 +170,7 @@
 
 .predictor-disclaimer {
     font-size: 12px;
-    color: #888;
+    color: #8892a0; /* Dimmer grey for disclaimer */
     margin-top: 20px;
     line-height: 1.5;
 }

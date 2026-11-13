@@ -21,7 +21,7 @@
   border: 1px solid var(--crm-line);
   border-radius: 14px;
   color: var(--crm-ink);
-  text-align: left;
+  text-align: center;
   line-height: 1.5;
 }
 
@@ -33,58 +33,58 @@
 
 .crm h2,
 .crm h3,
-.crm h4 {
+.crm p {
   margin: 0;
   color: var(--crm-ink);
   line-height: 1.25;
 }
 
 .crm h2 {
-  font-size: 1.6rem;
-  font-weight: 650;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.6px;
+  text-align: center;
 }
 
 .crm h3 {
-  font-size: 1.1rem;
-  font-weight: 650;
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.2px;
 }
 
-.crm h4 {
-  margin-bottom: 10px;
-  font-size: 1rem;
-  font-weight: 650;
-}
 
 .crm p {
-  margin: 0;
+  margin: 6px 0 0;
+  color: #bfc9d9;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 /* ---------- header ---------- */
 
-.crm-header {
-  padding-bottom: 18px;
+.crm .crm-header {
+  text-align: center;
 }
 
-.crm-subtitle {
-  margin-top: 6px;
-  color: var(--crm-muted);
-  font-size: 0.95rem;
+.crm .crm-subtitle,
+.crm .crm-definition {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 90%;
 }
 
-.crm-definition {
-  max-width: 68ch;
-  margin-top: 12px;
-  color: var(--crm-ink);
-  font-size: 0.95rem;
-}
 
 /* ---------- controls ---------- */
 
 .crm-controls {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  gap: 12px;
   padding: 16px 18px;
   background: var(--crm-soft);
   border: 1px solid var(--crm-line);
@@ -92,8 +92,14 @@
 }
 
 .crm-slider {
-  flex: 1;
-  max-width: 560px;
+  width: 95%;
+  text-align: left;
+}
+
+.crm-reset-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .crm-slider label {
@@ -140,6 +146,7 @@
 .crm-reset:hover,
 .crm-more:hover {
   background: #f1f5f9;
+  color:#171b26;
 }
 
 .crm-more {
@@ -159,7 +166,8 @@
   margin-top: 10px;
   color: var(--crm-muted);
   font-size: 0.88rem;
-  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto; 
 }
 
 .crm-caption-tight {
@@ -173,7 +181,6 @@
   border-left: 3px solid var(--crm-accent);
   border-radius: 0 8px 8px 0;
   font-size: 0.92rem;
-  max-width: 72ch;
 }
 
 .crm-empty {
@@ -186,6 +193,23 @@
 }
 
 /* ---------- accuracy ---------- */
+
+.crm-accuracy-card {
+  background: var(--crm-card, #1d2136);
+  border: 1px solid var(--crm-line,#1d2136);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.crm-accuracy-card .crm-section {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
 
 .crm-accuracy-top {
   display: flex;
@@ -285,6 +309,22 @@
 }
 
 /* ---------- charts ---------- */
+.crm-charts-card {
+  background: var(--crm-card, #1d2136);
+  border: 1px solid var(--crm-line,#1d2136);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.crm-charts-card .crm-section {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
 
 .crm-grid-two {
   display: grid;
@@ -423,12 +463,29 @@
 
 
 /* ---------- feature chart ---------- */
+.crm-feature-card {
+  background: var(--crm-card, #1d2136);
+  border: 1px solid var(--crm-line,#1d2136);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.crm-feature-card .crm-section {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
 
 .crm-feature-head {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column; 
+  align-items: stretch; /* <--- Change this from center to stretch */
   gap: 16px;
+  width: 100%; /* Ensure it takes full width */
 }
 
 .crm-toggle {
@@ -437,6 +494,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   overflow: hidden;
+  align-self: flex-end;
 }
 
 .crm-toggle button {
@@ -454,8 +512,8 @@
 }
 
 .crm-toggle button.is-active {
-  background: var(--crm-ink);
-  color: #ffffff;
+  background:  #f5f5f5;
+  color:#171b26;
 }
 
 .crm-feature-box svg {
@@ -485,6 +543,22 @@
 }
 
 /* ---------- filters + table ---------- */
+.crm-table-card {
+  background: var(--crm-card, #1d2136);
+  border: 1px solid var(--crm-line,#1d2136);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.crm-table-card .crm-section {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
 
 .crm-filters {
   display: flex;
@@ -513,7 +587,7 @@
   color: var(--crm-ink);
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  font: inherit;
+  font: #000000;
   font-size: 0.92rem;
 }
 
@@ -542,22 +616,23 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
+  background: #ffffff;
+  color: #3f3f3f;
 }
 
 .crm-table th,
 .crm-table td {
   padding: 10px 14px;
-  text-align: left;
+  text-align: center;
   vertical-align: middle;
   white-space: nowrap;
 }
 
 .crm-table thead th {
-  background: var(--crm-soft);
-  color: var(--crm-muted);
+  background: var(--crm-muted);
+  color: #3f3f3f;
   font-size: 0.82rem;
   font-weight: 600;
-  border-bottom: 1px solid var(--crm-line);
 }
 
 .crm-table tbody tr + tr > * {
@@ -678,6 +753,48 @@
   .crm-matrix-cell {
     transition: none;
   }
+}
+
+.crm .crm-chart-box .crm-tick,
+.crm .crm-chart-box .crm-axis-title,
+.crm .crm-chart-box .crm-roc-note,
+.crm .crm-chart-box .crm-auc-label,
+.crm .crm-chart-box .crm-matrix-axis,
+.crm .crm-chart-box .crm-matrix-count,
+.crm .crm-chart-box .crm-matrix-name,
+.crm .crm-chart-box .crm-matrix-share,
+.crm .crm-chart-box .crm-matrix-count.is-light,
+.crm .crm-chart-box .crm-matrix-name.is-light,
+.crm .crm-chart-box .crm-matrix-share.is-light,
+.crm .crm-chart-box .crm-feature-name,
+.crm .crm-chart-box .crm-feature-value {
+  fill: #000000;
+}
+
+/* Lines: reference diagonal, zero line, error whiskers */
+.crm .crm-chart-box .crm-roc-diagonal,
+.crm .crm-chart-box .crm-zero-line {
+  stroke: #000000;
+}
+
+.crm .crm-chart-box .crm-error line {
+  stroke: #000000;
+}
+
+/* Keep gridlines subtle so black text and bars stay the focus */
+.crm .crm-chart-box .crm-grid {
+  stroke: #d9dee7;
+}
+
+/* Matrix cells: lighten the blue so black text stays readable on the darkest cell */
+.crm .crm-chart-box .crm-matrix-cell {
+  opacity: 0.55;
+}
+
+/* ROC hover tooltip was white text on a white background; make it readable */
+.crm .crm-chart-box .crm-chart-tip {
+  background: #000000;
+  color: #ffffff;
 }
 
 
