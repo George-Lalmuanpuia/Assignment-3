@@ -2,6 +2,29 @@
 
 This directory contains the React single-page application. It handles the UI, routing, and renders the interactive D3.js charts.
 
+## Folder structure
+- src/assets/: Contains images and other static assets used in the frontend.
+
+- src/charts/: Contains the D3.js charts and data visualisation components.
+
+- src/components/: Contains reusable UI components such as Navbar.jsx.
+
+- src/pages/: Contains the main application pages (Home.jsx, About/, ClusterExplorer/, RiskPredictor/).
+
+- src/services/: Contains functions for communicating with the FastAPI backend.
+
+- src/styles/: Contains CSS files for styling the application.
+
+- src/App.jsx: Main React component that manages the application structure and routing.
+
+- src/App.css: Contains styling for the main application component.
+
+- src/index.css: Contains global CSS styling.
+
+- src/main.jsx: Entry point of the React application.
+
+
+
 ## Setup
 
 1. **Install Node modules:**

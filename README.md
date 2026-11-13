@@ -1,4 +1,4 @@
-# Road Safe: NSW LGA Road Risk Explorer
+# RoadSafe: NSW LGA Road Risk Explorer
 
 A full-stack web application that predicts road crash risk for Local Government Areas (LGAs) in New South Wales, Australia. The application uses machine learning models trained on historical crash data (2020–2024) and provides interactive data visualisations built with D3.js.
 
@@ -6,7 +6,7 @@ A full-stack web application that predicts road crash risk for Local Government 
 
 - `/backend`: The FastAPI server, AI models, and data processing.
 - `/frontend`: The React single-page application, D3.js charts, and UI.
-- `/docs`: API contract, report sections, and meeting minutes.
+- `/docs`: API contract, copy of the project report, contribution form, and meeting minutes.
 
 ## Quick Start
 
