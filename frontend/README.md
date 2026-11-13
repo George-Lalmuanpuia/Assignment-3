@@ -98,3 +98,12 @@ React – Frontend components and interactive page functionality.
 
 D3.js – Data-driven chart rendering, positioning, styling and transitions.
 
+## File created
+ScatterPlot.jsx
+ScatterPlot.css
+
+ClusterProfile.jsx
+ClusterProfile.css
+
+ClusterExplorer.jsx
+ClusterExplorer.css
