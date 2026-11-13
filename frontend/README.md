@@ -91,3 +91,68 @@ ClusterProfile.css
 
 ClusterExplorer.jsx
 ClusterExplorer.css
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+## Risk Predictor (Teh Zhi Xiang)
+The Risk Predictor allows users to explore how well a Logistic Regression model predicts high crash risk across New South Wales (NSW) Local Government Areas (LGAs). An LGA is classified as high risk when it has 250 or more crashes per 100,000 residents.
+
+## Features
+ROC Curve: Displays the trade-off between true positive and false positive rates at different probability thresholds, with the AUC value and a marker showing the selected threshold.
+
+Confusion Matrix: Displays the true negatives, false positives, false negatives and true positives for the 2024 test set, updating when the threshold changes.
+
+Feature Importance Chart: Displays the importance of each feature, with a toggle to show whether each feature pushes an LGA towards high or low risk.
+
+Interactive Filters: Allows users to adjust the probability threshold, search for LGAs, filter by predicted risk level and show only incorrect predictions.
+
+LGA Predictions Table: Displays each LGA's predicted risk probability, predicted risk level and actual risk level.
+
+Risk Predictor Form: Allows users to enter hypothetical LGA characteristics, including population, severe crash percentage, wet-weather crash percentage and average speed limit, to receive a predicted risk level and probability.
+
+## Data Files
+The Risk Predictor uses four processed CSV files and one trained model:
+
+logreg_test_predictions.csv - Contains the 2024 test set predictions, actual labels and predicted probabilities, used by the ROC Curve, Confusion Matrix and LGA Predictions Table.
+
+logreg_metrics.csv - Contains the model's summary performance metrics.
+
+logreg_permutation_importance.csv - Contains the permutation importance values used by the Feature Importance Chart.
+
+logreg_coefficients.csv - Contains the Logistic Regression coefficients used by the direction view.
+
+lga_risk_model.joblib - Contains the trained Scikit-Learn Pipeline, used by the backend to make predictions from user inputs.
+
+## Backend API Integration
+The frontend retrieves model results and predictions through the FastAPI backend.
+
+GET /api/classification/predictions - Retrieves the test set predictions.
+
+GET /api/classification/metrics - Retrieves the model's performance metrics.
+
+GET /api/classification/importance - Retrieves feature importance values.
+
+GET /api/classification/coefficients - Retrieves feature coefficients.
+
+POST /api/classification/predict - Receives user inputs from the Risk Predictor Form and returns the predicted risk level and probability.
+
+The backend validates user inputs using a Pydantic schema before making predictions. Ensure that the FastAPI backend is running before opening the Risk Predictor page.
+Chart types used
+React – Frontend components, form handling, filters and interactive page functionality.
+
+D3.js – Data-driven chart rendering, scales, colour schemes, tooltips and interactive updates.
+
+FastAPI – Backend API for retrieving model results and processing user predictions.
+
+Scikit-Learn – Logistic Regression model training, prediction and performance evaluation.
+
+## File created
+CrashRiskModel.jsx
+
+CrashRiskModel.css
+
+RiskPredictorForm.jsx
+
+RiskPredictorForm.css
+
+RiskPredictor.jsx
