@@ -6,7 +6,7 @@ A full-stack web application that predicts road crash risk for Local Government 
 
 - `/backend`: The FastAPI server, AI models, and data processing.
 - `/frontend`: The React single-page application, D3.js charts, and UI.
-- `/docs`: API contract, report sections, and meeting minutes.
+- `/docs`: API contract, copy of the project report, contribution form, and meeting minutes.
 
 ## Quick Start
 
