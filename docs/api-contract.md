@@ -47,7 +47,7 @@ Returns historical data for a specific LGA.
   "detail": "LGA 'Atlantis' not found"
 }
 ```
-## 3. POST /predict
+## 3. POST /api/classification/predict
 Accepts LGA features and return the logistic regression AI prediction.
 
 **Request Body:** 
@@ -56,7 +56,7 @@ Accepts LGA features and return the logistic regression AI prediction.
   "population": 50000,
   "severe_pct": 60.0,
   "wet_weather_pct": 15.0,
-  "average_speed_limit": 20.0
+  "avg_speed_limit": 20.0
 }
 ```
 **Success Response (200 OK):**
@@ -69,7 +69,7 @@ Accepts LGA features and return the logistic regression AI prediction.
     "population": 50000,
     "severe_pct": 60.0,
     "wet_weather_pct": 15.0,
-    "average_speed_limit": 20.0
+    "avg_speed_limit": 20.0
   }
 }
 ```
