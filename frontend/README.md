@@ -40,6 +40,7 @@ This directory contains the React single-page application. It handles the UI, ro
 - **API URL:** All API requests are directed to `http://127.0.0.1:8000`. Ensure the backend is running.
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------
  ## Cluster Explorer (Jean-Luc)
 
 The Cluster Explorer allows users to explore road safety patterns across New South Wales (NSW) Local Government Areas (LGAs) through interactive visualisations.
@@ -81,3 +82,12 @@ React – Frontend components and interactive page functionality.
 
 D3.js – Data-driven chart rendering, positioning, styling and transitions.
 
+## File created
+ScatterPlot.jsx
+ScatterPlot.css
+
+ClusterProfile.jsx
+ClusterProfile.css
+
+ClusterExplorer.jsx
+ClusterExplorer.css
