@@ -252,9 +252,9 @@
 }
 
 
-/*TABLET RESPONSIVENESS */
+/*IPAD RESPONSIVENESS */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
   /* Stacks the cluster cards vertically. */
   .cluster-intro-cards {
@@ -290,7 +290,7 @@
 
 /*MOBILE RESPONSIVENESS */
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
 
   /* Reduces page spacing  */
   .cluster-explorer-page {
