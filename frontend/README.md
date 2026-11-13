@@ -19,3 +19,47 @@ This directory contains the React single-page application. It handles the UI, ro
 
 - **CORS:** The backend is configured to only accept requests from port `5173`. If you run this app on a different port, API calls will fail.
 - **API URL:** All API requests are directed to `http://127.0.0.1:8000`. Ensure the backend is running.
+
+
+ ## Cluster Explorer (Jean-Luc)
+
+The Cluster Explorer allows users to explore road safety patterns across New South Wales (NSW) Local Government Areas (LGAs) through interactive visualisations.
+
+## Features
+
+Scatter Plot: Displays LGA-year records using PCA coordinates (PC1 and PC2), with K-Means cluster labels and DBSCAN noise information.
+
+Interactive Filters: Allows users to filter the Scatter Plot by year, LGA, K-Means cluster and DBSCAN results.
+
+Cluster Profile Bar Chart: Displays the average road-safety feature values for each K-Means cluster.
+
+Cluster Selection: Allows users to switch between individual clusters and view their corresponding feature profiles.
+
+Interactive Charts: Uses D3.js to render the charts, including tooltips, dynamic updates and transitions.
+
+# Data Files
+
+The Cluster Explorer uses two processed CSV files:
+
+
+lga_cluster_points.csv - Contains LGA-year records, PCA coordinates, K-Means cluster labels and DBSCAN noise information for the Scatter Plot.
+
+cluster_profiles.csv - Contains the average road-safety feature values for each K-Means cluster, used by the Cluster Profile Bar Chart.
+
+## Backend API Integration
+
+The frontend retrieves the processed clustering data through the FastAPI backend.
+
+
+/api/clusters/pca - Retrieves PCA coordinates and clustering information for the Scatter Plot.
+
+/api/clusters/profiles - Retrieves average feature values for the Cluster Profile Bar Chart.
+
+Ensure that the FastAPI backend is running before opening the Cluster Explorer page.
+
+## Chart types used
+
+React – Frontend components and interactive page functionality.
+
+D3.js – Data-driven chart rendering, positioning, styling and transitions.
+
