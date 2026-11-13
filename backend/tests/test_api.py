@@ -3,14 +3,14 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
-from fastapi.testclient import TestClient
+from starlette.testclient import TestClient
 from app.main import app
 
 client = TestClient(app)
 
 # --- TEST 1: Valid Prediction ---
 def test_predict_valid():
-    response = client.post("/predict", json={
+    response = client.post("/api/classification/predict", json={
         "population": 50000,
         "severe_pct": 60.0,
         "wet_weather_pct": 15.0,
@@ -21,7 +21,7 @@ def test_predict_valid():
 
 # --- TEST 2: Missing Field ---
 def test_predict_missing_field():
-    response = client.post("/predict", json={
+    response = client.post("/api/classification/predict", json={
         "severe_pct": 60.0,
         "wet_weather_pct": 15.0,
         "avg_speed_limit": 80.0
@@ -30,7 +30,7 @@ def test_predict_missing_field():
 
 # --- TEST 3: Invalid Percentage ---
 def test_predict_invalid_percentage():
-    response = client.post("/predict", json={
+    response = client.post("/api/classification/predict", json={
         "population": 50000,
         "severe_pct": 150.0,
         "wet_weather_pct": 15.0,
