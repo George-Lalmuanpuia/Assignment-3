@@ -6,10 +6,22 @@ This directory contains the React single-page application. It handles the UI, ro
 - src/assets/: Contains images and other static assets used in the frontend.
 
 - src/charts/: Contains the D3.js charts and data visualisation components.
+   charts/classfication,
+         /cluster
+            ClusterProfile.jsx
+            ClusterProfile.css
+            ScatterPlot.jsx
+            ScatterPlot.css
 
 - src/components/: Contains reusable UI components such as Navbar.jsx.
 
-- src/pages/: Contains the main application pages (Home.jsx, About/, ClusterExplorer/, RiskPredictor/).
+- src/pages/: Contains the main application pages 
+(Home.jsx,
+ About/,
+  ClusterExplorer/
+                  ClusterExplorer.css
+                  ClusterExplorer.jsx
+  , RiskPredictor/).
 
 - src/services/: Contains functions for communicating with the FastAPI backend.
 
