@@ -95,7 +95,7 @@ ClusterExplorer.css
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 ## Risk Predictor (Teh Zhi Xiang)
-The Risk Predictor allows users to explore how well a Logistic Regression model predicts high crash risk across New South Wales (NSW) Local Government Areas (LGAs). An LGA is classified as high risk when it has 250 or more crashes per 100,000 residents.
+The Risk Predictor allows users to explore how well a Logistic Regression model predicts high crash risk across New South Wales (NSW) Local Government Areas (LGAs). An LGA is classified as high risk when it has above median amount of crashes or 254.9 or more crashes per 100,000 residents.
 
 ## Features
 ROC Curve: Displays the trade-off between true positive and false positive rates at different probability thresholds, with the AUC value and a marker showing the selected threshold.
@@ -125,19 +125,14 @@ lga_risk_model.joblib - Contains the trained Scikit-Learn Pipeline, used by the 
 
 ## Backend API Integration
 The frontend retrieves model results and predictions through the FastAPI backend.
+- /api/classification/predictions - Retrieves test set predictions.
+- /api/classification/metrics - Retrieves model evaluation metrics.
+- /api/classification/importance - Retrieves feature importance values.
+- /api/classification/coefficients - Retrieves model coefficients.
+- /api/classification/predict - Receives user inputs from the Risk Predictor Form and returns a predicted risk level and probability.
+Ensure that the FastAPI backend is running before opening the Risk Predictor page.
 
-GET /api/classification/predictions - Retrieves the test set predictions.
-
-GET /api/classification/metrics - Retrieves the model's performance metrics.
-
-GET /api/classification/importance - Retrieves feature importance values.
-
-GET /api/classification/coefficients - Retrieves feature coefficients.
-
-POST /api/classification/predict - Receives user inputs from the Risk Predictor Form and returns the predicted risk level and probability.
-
-The backend validates user inputs using a Pydantic schema before making predictions. Ensure that the FastAPI backend is running before opening the Risk Predictor page.
-Chart types used
+## Chart types used
 React – Frontend components, form handling, filters and interactive page functionality.
 
 D3.js – Data-driven chart rendering, scales, colour schemes, tooltips and interactive updates.
