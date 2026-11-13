@@ -56,6 +56,7 @@ This directory contains the React single-page application. It handles the UI, ro
 - **API URL:** All API requests are directed to `http://127.0.0.1:8000`. Ensure the backend is running.
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------
  ## Cluster Explorer (Jean-Luc)
 
 The Cluster Explorer allows users to explore road safety patterns across New South Wales (NSW) Local Government Areas (LGAs) through interactive visualisations.
@@ -107,3 +108,4 @@ ClusterProfile.css
 
 ClusterExplorer.jsx
 ClusterExplorer.css
+-------------------------------------------------------------------------------------------------------------------------------
