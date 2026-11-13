@@ -9,21 +9,21 @@ router = APIRouter()
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 
-@router.post("/predict", response_model=RiskResponse, tags=["AI Models"])
+@router.post("/api/classification/predict", response_model=RiskResponse, tags=["AI Models"])
 def predict_risk(data: RiskRequest):
     # Call the service function
     result = predict_lga_risk(
         data.population,
         data.severe_pct,
         data.wet_weather_pct,
-        data.rural_road_pct
+        data.avg_speed_limit
     )
     
     return {
         "risk_level": result["risk_level"],
         "probability": result["probability"],
         "threshold_used": result["threshold"],
-        "inputs_received": data.dict()
+        "inputs_received": data.model_dump()
     }
 
 # --- CHART ENDPOINTS Risk Predictor'S PAGE ---

@@ -27,24 +27,27 @@ Returns historical data for a specific LGA.
     {
       "LGA": "Camden",
       "Year": 2020,
-      "Population": 50000,
-      "Wet-weather %": 12.5,
-      "Rural-road %": 15.0,
-      "Crash rate per 100k": 126.2,
-      "Severe %": 60.0,
-      "total_crashes": 150
+      "Population": 112451,
+      "severe_count": 116,
+      "non_severe_count": 45,
+      "Wet-weather %": 9.32,
+      "Rural-road %": 0,
+      "Crash rate per 100k": 143.17,
+      "Severe %": 72.05,
+      "total_crashes": 161,
+      "Avg speed limit": 63.29
     }
   ]
 }
 ```
 
-**Error Response (404 Not Found):**
+**Error Response (404 Not Found) - If the LGA is not the dataset:** 
 ```json
 {
   "detail": "LGA 'Atlantis' not found"
 }
 ```
-## 3. POST /predict
+## 3. POST /api/classification/predict
 Accepts LGA features and return the logistic regression AI prediction.
 
 **Request Body:** 
@@ -53,7 +56,7 @@ Accepts LGA features and return the logistic regression AI prediction.
   "population": 50000,
   "severe_pct": 60.0,
   "wet_weather_pct": 15.0,
-  "rural_road_pct": 20.0
+  "avg_speed_limit": 20.0
 }
 ```
 **Success Response (200 OK):**
@@ -66,7 +69,7 @@ Accepts LGA features and return the logistic regression AI prediction.
     "population": 50000,
     "severe_pct": 60.0,
     "wet_weather_pct": 15.0,
-    "rural_road_pct": 20.0
+    "avg_speed_limit": 20.0
   }
 }
 ```
