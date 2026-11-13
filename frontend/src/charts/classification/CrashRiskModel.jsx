@@ -12,10 +12,9 @@ const MAX_THRESHOLD = 0.95;
 const ROWS_PER_PAGE = 15;
 
 const FEATURE_LABELS = {
-  Population: "Population",
+  "Population": "Population",
   "Severe %": "Severe crash %",
   "Wet-weather %": "Wet-weather crash %",
-  "Rural-road %": "Rural-road crash %",
   "Avg speed limit": "Avg speed limit",
 };
 
