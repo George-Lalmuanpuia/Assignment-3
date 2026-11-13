@@ -779,9 +779,9 @@ function CrashRiskModel({
           Logistic Regression |  2024 test data
         </p>
         <p className="crm-definition">
-          An LGA counts as high risk when it has a higher than median crash rate ( {riskThreshold} or more crashes
-          per 100,000 residents). The model sees each LGA's earlier years and
-          predicts whether it will be high risk in the test year.
+          An LGA is classified as high risk if its crash rate reaches or exceeds the median threshold 
+          of {riskThreshold} crashes per 100,000 residents. The model <br /> uses historical crash data from 2020
+           to 2023 to predict whether each LGA will fall into the high-risk category in 2024.
         </p>
       </header>
       <br />
