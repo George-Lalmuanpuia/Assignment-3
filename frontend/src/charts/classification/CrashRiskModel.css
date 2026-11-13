@@ -75,6 +75,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  width: 90%;
 }
 
 
@@ -82,9 +83,8 @@
 
 .crm-controls {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  gap: 12px;
   padding: 16px 18px;
   background: var(--crm-soft);
   border: 1px solid var(--crm-line);
@@ -92,8 +92,14 @@
 }
 
 .crm-slider {
-  flex: 1;
-  max-width: 1000px;
+  width: 95%;
+  text-align: left;
+}
+
+.crm-reset-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .crm-slider label {
@@ -160,7 +166,8 @@
   margin-top: 10px;
   color: var(--crm-muted);
   font-size: 0.88rem;
-  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto; 
 }
 
 .crm-caption-tight {
@@ -475,9 +482,10 @@
 
 .crm-feature-head {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column; 
+  align-items: stretch; /* <--- Change this from center to stretch */
   gap: 16px;
+  width: 100%; /* Ensure it takes full width */
 }
 
 .crm-toggle {
@@ -486,6 +494,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   overflow: hidden;
+  align-self: flex-end;
 }
 
 .crm-toggle button {
@@ -578,7 +587,7 @@
   color: var(--crm-ink);
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  font: inherit;
+  font: #000000;
   font-size: 0.92rem;
 }
 
@@ -607,6 +616,8 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
+  background: #ffffff;
+  color: #3f3f3f;
 }
 
 .crm-table th,
@@ -618,11 +629,10 @@
 }
 
 .crm-table thead th {
-  background: var(--crm-soft);
-  color: var(--crm-muted);
+  background: var(--crm-muted);
+  color: #3f3f3f;
   font-size: 0.82rem;
   font-weight: 600;
-  border-bottom: 1px solid var(--crm-line);
 }
 
 .crm-table tbody tr + tr > * {
