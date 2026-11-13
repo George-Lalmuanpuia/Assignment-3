@@ -223,29 +223,36 @@
 }
 
 /* Positions the chart title and record count within the panel. */
+
 .profile-chart-heading {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;/* Places the title and count at opposite ends. */
-  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   margin-bottom: 18px;
+  text-align: center;
 }
 
-/* Styles the title displayed above the bar chart. */
+/* Styles and centres the chart title. */
 .profile-chart-heading h3 {
+  width: 100%;
   margin: 0;
   color: #ffffff;
   font-size: 16px;
   font-weight: 750;
   letter-spacing: -0.2px;
+  text-align: center;
 }
 
-/* Styles the explanatory text below the chart title. */
+/* Styles and centres the explanatory text. */
 .profile-chart-heading p {
+  width: 100%;
   margin: 6px 0 0;
   color: #bfc9d9;
   font-size: 11px;
   line-height: 1.5;
+  text-align: center;
 }
 
 /* Styles the label displaying the number of chart records. */
@@ -365,8 +372,8 @@
 
 /*RESPONSIVENESS FOR MOBILE AND IPAD */
 
-/* Adjusts the chart layout and text sizes for screens 800px or smaller. */
-@media (max-width: 800px) {
+/* Adjusts the chart layout and text sizes for screens 900px or smaller. */
+@media (max-width: 900px) {
   .cluster-profile-chart {
     padding: 22px;
   }
@@ -426,11 +433,6 @@
     font-size: 11px;
   }
 
-  /* Stacks the chart heading and record count vertically. */
-  .profile-chart-heading {
-    flex-direction: column;
-    gap: 9px;
-  }
 
   .profile-chart-count {
     align-self: flex-start;
